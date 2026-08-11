@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>scarytracking - the tail on your links</title>
+  <meta name="description" content="Everything after the ? in a URL is a note to the website. Who sent you, when, from where. Here's how to cut it off.">
+  <meta property="og:title" content="scarytracking - the tail on your links">
+  <meta property="og:description" content="Everything after the ? in a URL is a note to the website. Who sent you, when, from where. Here's how to cut it off.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gabytz777.github.io/-slopmadebymestudios.lol-/scarytracking.html">
+  <meta property="og:image" content="https://gabytz777.github.io/-slopmadebymestudios.lol-/files/og-scarytracking.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f97316">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-[100dvh] font-sans antialiased bg-void-950 text-zinc-200 overflow-x-hidden selection:bg-ember-400 selection:text-void-950">
+
+  <div class="bg-ember-500/10 border-b border-ember-500/20">
+    <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-2.5 flex flex-wrap items-center justify-center gap-2 font-mono text-[12.5px] text-zinc-400">
+      <i class="ph ph-shield-check text-ember-400 shrink-0" aria-hidden="true"></i>
+      <span>educational page. nothing here sends your data anywhere. your browser does all the reading.</span>
+    </div>
+  </div>
+
+  <header class="max-w-[1100px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between border-b border-zinc-800/80">
+    <a href="#top" class="flex items-center gap-2.5">
+      <span class="h-5 w-5 rounded-[4px] bg-ember-400 shadow-[inset_0_0_0_2px_oklch(0.13_0.02_40)]" aria-hidden="true"></span>
+      <span class="font-pixel text-[11px] text-zinc-100">scarytracking</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 font-mono text-[13px] text-zinc-400">
+      <a href="#how" class="hover:text-zinc-100 transition-colors">how it works</a>
+      <a href="#why" class="hover:text-zinc-100 transition-colors">why it matters</a>
+      <a href="#fix" class="hover:text-zinc-100 transition-colors">fix it</a>
+      <a href="#demo" class="hover:text-zinc-100 transition-colors">demo</a>
+    </nav>
+    <a href="index.html" class="btn px-4 py-1.5 text-[13px]">
+      all projects
+      <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+    </a>
+  </header>
+
+  <main class="max-w-[1100px] mx-auto px-4 md:px-8">
+
+    <section id="top" class="min-h-[calc(100dvh-4rem)] grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-14 items-center pt-14 lg:pt-2 pb-16">
+      <div>
+        <h1 class="text-[clamp(2.5rem,6.5vw,4rem)] font-bold tracking-[-0.03em] leading-[1.05] text-zinc-50 [text-wrap:balance]">
+          your links are <span class="text-ember-400">tattling</span> on you
+        </h1>
+        <p class="mt-5 text-lg md:text-xl text-zinc-400 leading-relaxed max-w-[60ch]">
+          Everything after the ? in a URL is a note to the website. Who sent you, when, from where.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="#demo" class="btn btn-primary px-7 py-3.5">
+            <i class="ph ph-eye" aria-hidden="true"></i>
+            see what it knows
+          </a>
+          <a href="#fix" class="btn px-7 py-3.5">
+            <i class="ph ph-scissors" aria-hidden="true"></i>
+            cut the tail
+          </a>
+        </div>
+      </div>
+
+      <aside class="card rounded-2xl p-7 reveal is-visible">
+        <p class="font-mono text-[11px] text-zinc-500">case file: a youtube link</p>
+        <code class="mt-4 block font-mono text-[13.5px] leading-7 break-words">
+          <span class="text-zinc-100">https://youtu.be/dQw4w9WgXcQ</span><span class="text-ember-400 font-bold">?si=</span><span class="text-ember-400 font-bold">5ZmW8Qs1syEsY4GS</span>
+        </code>
+        <div class="mt-6 space-y-3 text-[13px] leading-6">
+          <div class="flex items-start gap-3">
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-[3px] bg-zinc-600" aria-hidden="true"></span>
+            <p class="text-zinc-400"><span class="font-mono text-zinc-200">the video</span> - what you think you're clicking</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="mt-2 h-2 w-2 shrink-0 rounded-[3px] bg-ember-400" aria-hidden="true"></span>
+            <p class="text-zinc-400"><span class="font-mono text-ember-400">the tail</span> - says who sent you, when, from where</p>
+          </div>
+        </div>
+        <button id="copy-clean-btn" data-clean-url="https://youtu.be/dQw4w9WgXcQ"
+                class="btn mt-7 w-full justify-center px-4 py-2.5 text-[13.5px]">
+          <i class="ph ph-copy" aria-hidden="true"></i>
+          <span id="copy-clean-label">copy clean</span>
+        </button>
+      </aside>
+    </section>
+  </main>
+
+  <div class="border-y border-zinc-800 bg-ember-400 overflow-hidden py-3" aria-hidden="true">
+    <div class="flex w-max motion-safe:animate-marquee gap-10 whitespace-nowrap font-mono text-[13px] uppercase tracking-[0.16em] text-void-950">
+      <span>utm_source</span><span class="text-void-950/50">/</span>
+      <span>gclid</span><span class="text-void-950/50">/</span>
+      <span>fbclid</span><span class="text-void-950/50">/</span>
+      <span>si</span><span class="text-void-950/50">/</span>
+      <span>mc_eid</span><span class="text-void-950/50">/</span>
+      <span>yclid</span><span class="text-void-950/50">/</span>
+      <span>ref</span><span class="text-void-950/50">/</span>
+      <span>spm</span><span class="text-void-950/50">/</span>
+      <span>igshid</span><span class="text-void-950/50">/</span>
+      <span>sc_cid</span><span class="text-void-950/50">/</span>
+      <span>cid</span><span class="text-void-950/50">/</span>
+      <span>utm_source</span><span class="text-void-950/50">/</span>
+      <span>gclid</span><span class="text-void-950/50">/</span>
+      <span>fbclid</span><span class="text-void-950/50">/</span>
+      <span>si</span><span class="text-void-950/50">/</span>
+      <span>mc_eid</span><span class="text-void-950/50">/</span>
+      <span>yclid</span><span class="text-void-950/50">/</span>
+      <span>ref</span><span class="text-void-950/50">/</span>
+      <span>spm</span><span class="text-void-950/50">/</span>
+      <span>igshid</span><span class="text-void-950/50">/</span>
+      <span>sc_cid</span><span class="text-void-950/50">/</span>
+      <span>cid</span><span class="text-void-950/50">/</span>
+    </div>
+  </div>
+
+  <main class="max-w-[1100px] mx-auto px-4 md:px-8">
+
+    <section id="how" class="pt-20 md:pt-28 pb-10 md:pb-16">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-zinc-50 [text-wrap:balance]">
+        what's in the tail
+      </h2>
+      <p class="mt-4 text-base md:text-lg text-zinc-400 leading-relaxed max-w-[65ch]">
+        Depending on the site, some of these tags. Each one names the person who moved you.
+      </p>
+      <div class="mt-10">
+        <div class="flex items-start gap-5 py-6 border-b border-zinc-800/80">
+          <i class="ph ph-link-simple text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+          <div>
+            <p class="font-mono text-[15px] font-bold text-ember-400">si</p>
+            <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">A session tag. YouTube bolts it onto shared links so the site knows who sent you, from where, and at what time.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-5 py-6 border-b border-zinc-800/80">
+          <i class="ph ph-tag text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+          <div>
+            <p class="font-mono text-[15px] font-bold text-ember-400">utm_*</p>
+            <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">Campaign tags, built for ads and newsletters. They name the exact ad that moved you, in the format marketing teams can count.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-5 py-6 border-b border-zinc-800/80">
+          <i class="ph ph-cursor-click text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+          <div>
+            <p class="font-mono text-[15px] font-bold text-ember-400">fbclid / gclid</p>
+            <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">Ad clicker ids from Meta and Google. They tie your click to the ad that paid for it, and to the profile attached to it.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-5 py-6">
+          <i class="ph ph-map-trifold text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+          <div>
+            <p class="font-mono text-[15px] font-bold text-ember-400">ref / igshid / spm</p>
+            <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">Referrer tags. Instagram, shops and some social sites use them to log which page, post or photo walked you in.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="pb-10 md:pb-16">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-zinc-50 [text-wrap:balance]">
+        it's not just for tracking
+      </h2>
+      <p class="mt-4 text-base md:text-lg text-zinc-400 leading-relaxed max-w-[65ch]">
+        Every tattletale feeds a system that files, sells and reuses what you just told it.
+      </p>
+      <div class="card rounded-2xl mt-10 divide-y divide-zinc-800/80">
+        <div class="flex items-start gap-5 p-6 md:p-7">
+          <i class="ph ph-fingerprint text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+          <div>
+            <p class="font-mono text-[14px] font-bold text-zinc-100">they build a file on you</p>
+            <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">Every click carries an id. The file outlives the tab, grows with each link you follow, and later decides what the site shows you.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-5 p-6 md:p-7">
+          <i class="ph ph-user-list text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+          <div>
+            <p class="font-mono text-[14px] font-bold text-zinc-100">the file changes hands</p>
+            <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">Profiles move between ad networks and data brokers. You never see the file, and it still follows you across the web.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-5 p-6 md:p-7">
+          <i class="ph ph-eye-slash text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+          <div>
+            <p class="font-mono text-[14px] font-bold text-zinc-100">the part you can't click out of</p>
+            <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">The tail is the sharing part, not the visit. The site still sees your IP the moment you arrive. Only a VPN or proxy hides that.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fix" class="pb-10 md:pb-16">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-zinc-50 [text-wrap:balance]">
+        cut the tail
+      </h2>
+      <p class="mt-4 text-base md:text-lg text-zinc-400 leading-relaxed max-w-[65ch]">
+        Three ways, from the setting you already have to the habit that sticks.
+      </p>
+      <div class="mt-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-start">
+        <div>
+          <div class="flex items-start gap-5 py-4">
+            <i class="ph ph-copy-simple text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+            <div>
+              <p class="font-mono text-[14px] font-bold text-zinc-100">copy clean</p>
+              <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[65ch]">In Firefox, right click any link or the address bar and pick <span class="text-zinc-200">Copy Clean Link</span>. Older builds call it Copy Without Site Tracking. The paste comes out with no tail.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-5 py-4">
+            <i class="ph ph-shield-check text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+            <div>
+              <p class="font-mono text-[14px] font-bold text-zinc-100">strip as you browse</p>
+              <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[65ch]">uBlock Origin and Link Cleaner rip these tags out of every page you visit, so sites never even receive them.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-5 py-4">
+            <i class="ph ph-scissors text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+            <div>
+              <p class="font-mono text-[14px] font-bold text-zinc-100">snip it by hand</p>
+              <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[65ch]">Any browser, any link: select everything from the first ? to the end of the address bar, delete it, hit Enter. Nothing breaks.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-5 py-4">
+            <i class="ph ph-warning text-ember-400 text-2xl mt-0.5 shrink-0" aria-hidden="true"></i>
+            <div>
+              <p class="font-mono text-[14px] font-bold text-zinc-100">know the limit</p>
+              <p class="mt-1.5 text-[14.5px] leading-7 text-zinc-400 max-w-[65ch]">Stripping the tail does not make you invisible. The destination site always sees your IP. It just stops the tattling.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl overflow-hidden reveal">
+          <div class="flex items-center justify-between gap-3 px-5 py-3 border-b border-zinc-800/80">
+            <p class="font-mono text-[12px] text-zinc-400">server.log</p>
+            <span class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-zinc-500 border border-zinc-700 rounded-full px-2.5 py-0.5">sample entry</span>
+          </div>
+          <pre class="p-5 font-mono text-[12.5px] leading-6 text-zinc-400 overflow-x-auto"><span class="text-zinc-200"># with the tail</span>
+GET /watch?v=dQw4w9WgXcQ<span class="text-ember-400 font-bold">?si=5ZmW8Qs1syEsY4GS</span>
+  ip: 83.36.xx.xx          region: spain
+  time: 12 aug 2026, 13:02 utc
+  agent: firefox 141 / windows
+  referer: slopmadebymestudios.lol
+
+<span class="text-zinc-200"># without it</span>
+GET /watch?v=dQw4w9WgXcQ
+  ip: 83.36.xx.xx          region: spain
+  time: 12 aug 2026, 13:02 utc</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section id="demo" class="max-w-[1100px] mx-auto px-4 md:px-8 pb-20">
+    <div class="rounded-2xl bg-ember-400 px-6 md:px-12 py-12 md:py-14 text-center reveal overflow-hidden">
+      <p class="font-mono text-[10.5px] uppercase tracking-[0.18em] text-void-950/60">live demo</p>
+      <h2 class="mt-4 font-pixel text-[clamp(1.1rem,3.4vw,1.6rem)] leading-[1.6] text-void-950">
+        are you not scared yet?
+      </h2>
+      <p class="mt-5 text-base md:text-lg text-void-950/75 leading-relaxed max-w-[55ch] mx-auto">
+        Copy this link, open it in a new tab, and watch it unpack what it knows about you.
+      </p>
+      <div class="mt-8 max-w-[720px] mx-auto">
+        <div class="rounded-full bg-void-950 px-5 py-4 flex items-center gap-3">
+          <code id="demo-link" class="flex-1 min-w-0 font-mono text-[12.5px] md:text-[13.5px] text-ember-300 break-all leading-6 text-left">
+            scarytracking-demo.html?si=5ZmW8Qs1syEsY4GS&amp;utm_source=scarytracking&amp;utm_medium=link&amp;utm_campaign=demo&amp;ref=slopmadebymestudios.lol
+          </code>
+          <button id="copy-demo-btn" class="btn shrink-0 px-3.5 py-2 text-[13px]" aria-label="copy the demo link">
+            <i class="ph ph-copy" aria-hidden="true"></i>
+            <span id="copy-demo-label">copy</span>
+          </button>
+        </div>
+        <a id="demo-open" target="_blank" rel="noopener"
+           href="scarytracking-demo.html?si=5ZmW8Qs1syEsY4GS&amp;utm_source=scarytracking&amp;utm_medium=link&amp;utm_campaign=demo&amp;ref=slopmadebymestudios.lol"
+           class="btn mt-6 px-8 py-3.5 bg-void-950 border-void-950 text-ember-400 hover:bg-void-900 hover:border-void-950 hover:text-ember-300">
+          <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          open it in a new tab
+        </a>
+      </div>
+      <p class="mt-6 font-mono text-[12px] text-void-950/60 max-w-[65ch] mx-auto leading-6">
+        nothing on the other side leaves your browser. it reads what your browser would hand to any analytics script, then forgets.
+      </p>
+    </div>
+  </section>
+
+  <footer class="border-t border-zinc-800/80">
+    <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-10 flex flex-col gap-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+          <span class="h-5 w-5 rounded-[4px] bg-ember-400 shadow-[inset_0_0_0_2px_oklch(0.13_0.02_40)]" aria-hidden="true"></span>
+          <span class="font-pixel text-[11px] text-zinc-100">scarytracking</span>
+        </div>
+        <nav class="flex flex-wrap items-center gap-6 font-mono text-[12.5px] text-zinc-500">
+          <a href="index.html" class="hover:text-zinc-100 transition-colors">all projects</a>
+          <a href="https://github.com/gabytz777/-slopmadebymestudios.lol-" target="_blank" rel="noopener" class="hover:text-zinc-100 transition-colors">source</a>
+          <a href="#fix" class="hover:text-zinc-100 transition-colors">cut the tail</a>
+          <a href="#top" class="hover:text-zinc-100 transition-colors">back to top ↑</a>
+        </nav>
+      </div>
+      <div class="pt-6 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-3 font-mono text-[12px] text-zinc-600">
+        <p>no cookies. no trackers. no logs. open the source if you don't believe us.</p>
+        <p>made with prompts. no humans were involved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      function copyText(text, done) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done, done);
+          return;
+        }
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        ta.remove();
+        done();
+      }
+
+      var cleanBtn = document.getElementById("copy-clean-btn");
+      if (cleanBtn) {
+        cleanBtn.addEventListener("click", function () {
+          copyText(cleanBtn.getAttribute("data-clean-url"), function () {
+            var label = document.getElementById("copy-clean-label");
+            label.textContent = "copied clean";
+            var icon = cleanBtn.querySelector(".ph");
+            icon.className = "ph ph-check";
+            setTimeout(function () {
+              label.textContent = "copy clean";
+              icon.className = "ph ph-copy";
+            }, 1800);
+          });
+        });
+      }
+
+      var demoBtn = document.getElementById("copy-demo-btn");
+      if (demoBtn) {
+        var demoHref = document.getElementById("demo-open").href;
+        demoBtn.addEventListener("click", function () {
+          copyText(demoHref, function () {
+            var label = document.getElementById("copy-demo-label");
+            label.textContent = "copied";
+            var icon = demoBtn.querySelector(".ph");
+            icon.className = "ph ph-check";
+            setTimeout(function () {
+              label.textContent = "copy";
+              icon.className = "ph ph-copy";
+            }, 1800);
+          });
+        });
+      }
+    })();
+  </script>
+  <script src="download.js"></script>
+</body>
+</html>

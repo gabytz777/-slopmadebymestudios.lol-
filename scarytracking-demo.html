@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>so, you clicked it - what the link knows about you</title>
+  <meta name="description" content="A live demo of what an analytics script can read from your browser, and the tracking parameters that arrived with the link.">
+  <meta property="og:title" content="so, you clicked it - what the link knows about you">
+  <meta property="og:description" content="This page reads your browser the way any analytics script would. Nothing leaves your machine.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gabytz777.github.io/-slopmadebymestudios.lol-/scarytracking-demo.html">
+  <meta property="og:image" content="https://gabytz777.github.io/-slopmadebymestudios.lol-/files/og-scarytracking.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f97316">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-[100dvh] font-sans antialiased bg-void-950 text-zinc-200 overflow-x-hidden selection:bg-ember-400 selection:text-void-950">
+
+  <header class="max-w-[1100px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between border-b border-zinc-800/80">
+    <a href="scarytracking.html" class="flex items-center gap-2.5">
+      <span class="h-5 w-5 rounded-[4px] bg-ember-400 shadow-[inset_0_0_0_2px_oklch(0.13_0.02_40)]" aria-hidden="true"></span>
+      <span class="font-pixel text-[11px] text-zinc-100">scarytracking</span>
+    </a>
+    <a href="scarytracking.html" class="btn px-4 py-1.5 text-[13px]">
+      <i class="ph ph-arrow-up-left" aria-hidden="true"></i>
+      go back, i'm scared
+    </a>
+  </header>
+
+  <main class="max-w-[1100px] mx-auto px-4 md:px-8">
+
+    <section id="top" class="pt-14 lg:pt-20 pb-10">
+      <div class="flex items-center gap-2.5 font-mono text-[12.5px] text-zinc-400">
+        <span class="h-2 w-2 rounded-full bg-ember-400 motion-safe:animate-pulse" aria-hidden="true"></span>
+        <span>reading your browser right now</span>
+      </div>
+      <h1 class="mt-5 text-[clamp(2.5rem,6.5vw,4rem)] font-bold tracking-[-0.03em] leading-[1.05] text-zinc-50 [text-wrap:balance]">
+        so, you clicked it
+      </h1>
+      <p class="mt-5 text-lg md:text-xl text-zinc-400 leading-relaxed max-w-[60ch]">
+        This page reads your browser the way any analytics script would. Nothing you see here left your computer.
+      </p>
+
+      <div class="mt-10 space-y-4">
+        <div class="card rounded-2xl p-6 md:p-7 reveal is-visible">
+          <h2 class="font-mono text-[12px] uppercase tracking-[0.14em] text-zinc-500">what arrived in the link</h2>
+          <div id="params-list" class="mt-5 space-y-0"></div>
+          <div id="params-empty" class="hidden mt-2">
+            <p class="text-[14.5px] leading-7 text-zinc-400 max-w-[60ch]">
+              No params on this link. Someone already cleaned it, or you typed the address by hand. A tracked link expects its tail to arrive with it.
+            </p>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl p-6 md:p-7 reveal">
+          <h2 class="font-mono text-[12px] uppercase tracking-[0.14em] text-zinc-500">what the page reads anyway</h2>
+
+          <div class="mt-5 grid md:grid-cols-2 gap-x-10 gap-y-5">
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">your browser</dt>
+              <dd id="f-browser" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">your timezone</dt>
+              <dd id="f-timezone" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">your language</dt>
+              <dd id="f-language" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">your operating system</dt>
+              <dd id="f-platform" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">your screen</dt>
+              <dd id="f-screen" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">your machine</dt>
+              <dd id="f-machine" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">your connection</dt>
+              <dd id="f-connection" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">cookies enabled</dt>
+              <dd id="f-cookies" class="mt-1.5 font-mono text-[12.5px] leading-6 text-zinc-200 break-all">reading...</dd>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-zinc-800/80">
+            <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">the part you don't see here</p>
+            <p class="mt-2 text-[14.5px] leading-7 text-zinc-400 max-w-[70ch]">
+              Your IP address and the region it maps to exist only on the server side. This page never phones home, so it never sees yours. A real tracked link's server reads your IP the instant you click, before any of this renders.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-20">
+      <div class="rounded-2xl bg-ember-400 px-6 md:px-12 py-12 md:py-14 text-center reveal">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-void-950 leading-tight">
+          close the tab. go fix your links.
+        </h2>
+        <p class="mt-4 text-base md:text-lg text-void-950/75 leading-relaxed max-w-[55ch] mx-auto">
+          One right click on a link, one menu item, and the tail stops travelling with you.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="scarytracking.html#fix" class="btn px-8 py-3.5 bg-void-950 border-void-950 text-ember-400 hover:bg-void-900 hover:border-void-950 hover:text-ember-300">
+            <i class="ph ph-scissors" aria-hidden="true"></i>
+            cut the tail
+          </a>
+          <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener" class="btn px-8 py-3.5 border-void-950/40 text-void-950 hover:border-void-950 hover:text-void-950 hover:bg-void-950/10">
+            get firefox
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-800/80">
+    <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-10 flex flex-col gap-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+          <span class="h-5 w-5 rounded-[4px] bg-ember-400 shadow-[inset_0_0_0_2px_oklch(0.13_0.02_40)]" aria-hidden="true"></span>
+          <span class="font-pixel text-[11px] text-zinc-100">scarytracking</span>
+        </div>
+        <nav class="flex flex-wrap items-center gap-6 font-mono text-[12.5px] text-zinc-500">
+          <a href="scarytracking.html" class="hover:text-zinc-100 transition-colors">back to the explanation</a>
+          <a href="index.html" class="hover:text-zinc-100 transition-colors">all projects</a>
+        </nav>
+      </div>
+      <div class="pt-6 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-3 font-mono text-[12px] text-zinc-600">
+        <p>this page just read your browser and forgot. no logs, no cookies.</p>
+        <p>made with prompts. no humans were involved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var PARAM_MEANINGS = {
+        si: "a session tag. tells the site who sent you, from where, at what time.",
+        utm_source: "names the place that sent you, like a newsletter, an ad or a video description.",
+        utm_medium: "names the medium: email, paid ad, link in a bio.",
+        utm_campaign: "names the campaign that paid for your click.",
+        ref: "referrer tag. names the page or post you came from.",
+        gclid: "google ads clicker id. ties your click to the ad that bought it.",
+        fbclid: "meta ads clicker id. ties your click to the ad that bought it.",
+        igshid: "instagram share tag. logs which post or profile walked you in.",
+        spm: "shopping platform tag. logs which product page you came from.",
+        mc_eid: "mailchimp contact id. tells the sender exactly which email you read.",
+        yclid: "yandex ads clicker id. same job as gclid, different company.",
+        sc_cid: "campaign id used by shops. usually long-lived, usually attached to you."
+      };
+
+      function setText(id, value) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var list = document.getElementById("params-list");
+      var empty = document.getElementById("params-empty");
+      var count = 0;
+
+      params.forEach(function (value, key) {
+        count++;
+        var row = document.createElement("div");
+        row.className = "py-4 first:pt-0 last:pb-0 border-b border-zinc-800/80 last:border-0";
+        var head = document.createElement("p");
+        head.className = "font-mono text-[14px] font-bold text-ember-400 break-all";
+        head.textContent = "?" + key;
+        var val = document.createElement("p");
+        val.className = "mt-1 font-mono text-[13px] text-zinc-200 break-all";
+        val.textContent = value;
+        var note = document.createElement("p");
+        note.className = "mt-1.5 text-[13.5px] leading-6 text-zinc-400";
+        note.textContent = PARAM_MEANINGS[key.toLowerCase()] ||
+          "a tag this site set. its exact job lives in the site's server-side code, which no visitor ever sees.";
+        row.appendChild(head);
+        row.appendChild(val);
+        row.appendChild(note);
+        list.appendChild(row);
+      });
+
+      if (count === 0) {
+        empty.classList.remove("hidden");
+      }
+
+      var offset = -new Date().getTimezoneOffset() / 60;
+      var fingerprint = {
+        browser: navigator.userAgent || "hidden by your browser",
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone +
+          " (UTC" + (offset >= 0 ? "+" : "") + offset + "h)",
+        language: (navigator.languages && navigator.languages.join(", ")) || navigator.language || "unknown",
+        platform: (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "unknown",
+        screen: window.screen.width + "x" + window.screen.height +
+          " at " + (window.devicePixelRatio || 1) + "x pixel ratio",
+        machine: (navigator.hardwareConcurrency || "?") + " cores" +
+          (navigator.deviceMemory ? ", " + navigator.deviceMemory + " GB memory" : ", memory hidden by browser"),
+        connection: navigator.onLine
+          ? "online, " + (navigator.connection ? navigator.connection.effectiveType : "type hidden")
+          : "offline",
+        cookies: navigator.cookieEnabled ? "yes" : "no"
+      };
+
+      setText("f-browser", fingerprint.browser);
+      setText("f-timezone", fingerprint.timezone);
+      setText("f-language", fingerprint.language);
+      setText("f-platform", fingerprint.platform);
+      setText("f-screen", fingerprint.screen);
+      setText("f-machine", fingerprint.machine);
+      setText("f-connection", fingerprint.connection);
+      setText("f-cookies", fingerprint.cookies);
+    })();
+  </script>
+  <script src="download.js"></script>
+</body>
+</html>
