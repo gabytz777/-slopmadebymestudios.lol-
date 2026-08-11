@@ -1,16 +1,79 @@
 @import "tailwindcss";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@phosphor-icons/web/regular";
 
 @theme {
-  --animate-fade-in: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
+  --color-void-950: oklch(0.13 0.02 260);
+  --color-void-900: oklch(0.17 0.025 260);
+  --color-void-800: oklch(0.22 0.03 260);
+  --color-void-700: oklch(0.28 0.035 260);
+  --color-ember-400: oklch(0.72 0.17 40);
+  --color-ember-500: oklch(0.64 0.19 40);
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-blink: blink 1.1s step-end infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pulse-glow: pulse-glow 3.2s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 oklch(0.72 0.17 40 / 0.35); }
+    50% { box-shadow: 0 0 0 14px oklch(0.72 0.17 40 / 0); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-void-950);
+    color: oklch(0.93 0.01 260);
+  }
+  ::selection {
+    background: var(--color-ember-400);
+    color: var(--color-void-950);
+  }
+}
+
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
+      transition: none;
     }
   }
 }
