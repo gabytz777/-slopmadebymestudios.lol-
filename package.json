@@ -1,0 +1,19 @@
+{
+  "name": "slopmadebymestudios.lol",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i src/input.css -o styles.css --minify",
+    "dev": "npx @tailwindcss/cli -i src/input.css -o styles.css --watch",
+    "start": "serve . -l 3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "serve": "^14.2.6"
+  }
+}
