@@ -15,96 +15,95 @@
 <body class="min-h-[100dvh] font-sans antialiased bg-paper text-ink overflow-x-hidden selection:bg-grass-500 selection:text-white">
 
   <!-- Warning banner: early dev notice -->
-  <div class="bg-grass-100 border-b-2 border-line">
-    <div class="max-w-[1400px] mx-auto px-4 md:px-8 py-3 flex flex-wrap items-center justify-center gap-2 font-mono text-[13px] text-ink">
+  <div class="bg-grass-100 border-b border-line">
+    <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-2.5 flex flex-wrap items-center justify-center gap-2 font-mono text-[12.5px] text-ink">
       <i class="ph ph-warning text-grass-700 shrink-0" aria-hidden="true"></i>
       <span>vib-MC is in early development and bugs can happen. If you find any, report them on our</span>
       <a href="https://github.com/gabytz777/vib-MC/issues" target="_blank" rel="noopener" class="text-grass-700 font-bold underline underline-offset-4 hover:text-grass-600">GitHub</a>.
     </div>
   </div>
 
-  <!-- Nav: single line, 64px -->
-  <header class="max-w-[1400px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-    <a href="#top" class="font-pixel text-[13px] text-ink">
-      vib<span class="text-grass-600">-MC</span>
+  <!-- Header: wordmark, nav, github -->
+  <header class="max-w-[1100px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between border-b border-line">
+    <a href="#top" class="flex items-center gap-2.5">
+      <span class="h-5 w-5 rounded-[4px] bg-grass-500 shadow-[inset_0_0_0_2px_oklch(1_0_0/0.7)]" aria-hidden="true"></span>
+      <span class="font-pixel text-[11px] text-ink">vib-MC</span>
     </a>
-    <nav class="hidden md:flex items-center gap-8 font-mono text-[13px] text-ink-soft">
+    <nav class="hidden md:flex items-center gap-7 font-mono text-[13px] text-ink-soft">
       <a href="#features" class="hover:text-ink transition-colors">features</a>
+      <a href="#checklist" class="hover:text-ink transition-colors">checklist</a>
       <a href="#quickstart" class="hover:text-ink transition-colors">quickstart</a>
       <a href="#commands" class="hover:text-ink transition-colors">commands</a>
       <a href="#releases" class="hover:text-ink transition-colors">releases</a>
     </nav>
     <a href="https://github.com/gabytz777/vib-MC" target="_blank" rel="noopener"
-       class="mc-btn font-mono text-[13px] px-3 py-1.5">github</a>
+       class="btn px-4 py-1.5 text-[13px]">github</a>
   </header>
 
-  <main class="max-w-[1400px] mx-auto px-4 md:px-8">
+  <main class="max-w-[1100px] mx-auto px-4 md:px-8">
 
-    <!-- Hero: text left, live release panel right -->
-    <section id="top" class="min-h-[calc(100dvh-4rem)] grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-10 items-center pt-16 lg:pt-6 pb-20">
+    <!-- Hero: badge + headline left, stats card right -->
+    <section id="top" class="min-h-[calc(100dvh-4rem)] grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-14 items-center pt-14 lg:pt-4 pb-16">
 
       <div>
-        <h1 class="font-pixel text-[clamp(2.25rem,6vw,4.25rem)] leading-[1.15] text-ink">
-          vib-MC
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-grass-100 border border-grass-200 px-3 py-1 font-mono text-[11.5px] uppercase tracking-[0.14em] text-grass-700">
+          vibed into existence
+        </span>
+
+        <h1 class="mt-5 text-[clamp(2.5rem,6.5vw,4rem)] font-bold tracking-[-0.03em] leading-[1.05] text-ink">
+          A Minecraft server written <span class="text-grass-600">entirely by AI</span>
         </h1>
 
-        <p class="mt-7 text-lg md:text-xl text-ink-soft leading-relaxed max-w-[65ch]">
-          A Minecraft server written entirely by AI, one prompt at a time.
-          It connects, generates terrain, and occasionally works.
+        <p class="mt-5 text-lg md:text-xl text-ink-soft leading-relaxed max-w-[60ch]">
+          One prompt at a time. It connects, generates terrain, and occasionally works.
         </p>
 
-        <div class="mt-9 flex flex-wrap items-center gap-4">
+        <div class="mt-8 flex flex-wrap items-center gap-4">
           <a href="#" id="download-btn" data-fallback-url="https://github.com/gabytz777/vib-MC/releases/download/v0.0.2/vib-mc.jar"
-             class="mc-btn-primary inline-flex items-center gap-2.5 px-6 py-3.5 font-mono text-sm font-bold uppercase tracking-wide">
+             class="btn btn-primary px-7 py-3.5">
             <i class="ph ph-download" aria-hidden="true"></i>
             <span id="download-label">Download .jar</span>
           </a>
           <a href="https://github.com/gabytz777/vib-MC" target="_blank" rel="noopener"
-             class="mc-btn inline-flex items-center gap-2 px-6 py-3.5 font-mono text-sm">
-            github
+             class="btn px-7 py-3.5">
+            view source
             <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
 
-      <!-- Live release panel (real data from the GitHub API) -->
-      <aside class="mc-panel reveal is-visible">
-        <div class="px-5 py-3 border-b-2 border-line font-mono text-[12px] uppercase tracking-[0.12em] text-ink-faint">
-          latest release
+      <!-- Hero stats card: real data from the GitHub API -->
+      <aside class="card rounded-2xl p-7 reveal is-visible">
+        <div class="flex items-center gap-3">
+          <span class="h-8 w-8 rounded-lg bg-grass-500 shadow-[inset_0_0_0_3px_oklch(1_0_0/0.7)]" aria-hidden="true"></span>
+          <div>
+            <p class="font-mono text-[12px] text-ink-faint">current release</p>
+            <p id="release-tag" class="font-mono text-lg font-bold text-ink">v0.0.2</p>
+          </div>
         </div>
-        <div class="p-5 font-mono text-[13px] leading-7">
-          <div class="flex items-baseline justify-between gap-4">
-            <span class="text-ink-faint">tag</span>
-            <span id="release-tag" class="text-grass-700 font-bold">v0.0.2</span>
+        <dl class="mt-6 grid grid-cols-3 gap-4">
+          <div>
+            <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint">startup</dt>
+            <dd class="mt-1 font-mono text-xl font-bold text-ink">~10s</dd>
           </div>
-          <div class="flex items-baseline justify-between gap-4 mt-2">
-            <span class="text-ink-faint">published</span>
-            <span id="release-date" class="text-ink">fetching...</span>
+          <div>
+            <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint">jar size</dt>
+            <dd id="release-size" class="mt-1 font-mono text-xl font-bold text-ink">fetching...</dd>
           </div>
-          <div class="flex items-baseline justify-between gap-4 mt-2">
-            <span class="text-ink-faint">protocol</span>
-            <span class="text-ink">340 / 1.12.2</span>
+          <div>
+            <dt class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint">protocol</dt>
+            <dd class="mt-1 font-mono text-xl font-bold text-ink">340</dd>
           </div>
-          <div class="flex items-baseline justify-between gap-4 mt-2">
-            <span class="text-ink-faint">requires</span>
-            <span class="text-ink">java 11+</span>
-          </div>
-          <div class="flex items-baseline justify-between gap-4 mt-2">
-            <span class="text-ink-faint">jar size</span>
-            <span id="release-size" class="text-ink">fetching...</span>
-          </div>
-          <p id="release-notes" class="mt-5 text-[12.5px] leading-6 text-ink-soft border-t-2 border-line pt-4"></p>
-          <a id="release-page-link" href="https://github.com/gabytz777/vib-MC/releases" target="_blank" rel="noopener"
-             class="mt-4 inline-block font-mono text-[12px] text-grass-700 font-bold hover:text-grass-600 transition-colors">
-            releases ↗
-          </a>
-        </div>
+        </dl>
+        <p class="mt-6 pt-5 border-t border-line text-[13px] leading-6 text-ink-faint max-w-[50ch]" id="release-notes">
+          Fetching the latest release notes...
+        </p>
       </aside>
     </section>
   </main>
 
   <!-- Marquee (the only one on the page) -->
-  <div class="border-y-2 border-line bg-grass-500 overflow-hidden py-3" aria-hidden="true">
+  <div class="border-y border-line bg-grass-500 overflow-hidden py-3" aria-hidden="true">
     <div class="flex w-max motion-safe:animate-marquee gap-12 whitespace-nowrap font-mono text-[13px] uppercase tracking-[0.18em] text-white"
          data-marquee>
       <span>protocol 340</span><span class="text-white/60">/</span>
@@ -122,102 +121,175 @@
     </div>
   </div>
 
-  <main class="max-w-[1400px] mx-auto px-4 md:px-8">
+  <main class="max-w-[1100px] mx-auto px-4 md:px-8">
 
-    <!-- Features: grouped by real status -->
-    <section id="features" class="pt-24 md:pt-32 pb-16">
-      <div class="grid md:grid-cols-3 gap-x-10 gap-y-12">
-        <div class="reveal">
-          <h2 class="text-2xl font-semibold tracking-tight text-ink">Shipped</h2>
-          <p class="mt-2 text-sm text-ink-faint">things it actually does today</p>
-          <ul class="mt-6 space-y-3 font-mono text-[13.5px] text-ink-soft">
-            <li>Actually starts</li>
-            <li>People can join</li>
-            <li>Terrain generates (somewhere)</li>
-            <li>Plugin API</li>
-            <li>Mobs that exist</li>
-          </ul>
+    <!-- Features: tinted cards, grouped by real status -->
+    <section id="features" class="pt-24 md:pt-28 pb-16">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-ink leading-tight">Why developers love vib-MC</h2>
+        <p class="mt-4 text-base text-ink-soft leading-relaxed">
+          Status is honest: green means it works, yellow means it almost works, grey means we have opinions.
+        </p>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="card rounded-2xl p-6 reveal">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-grass-500 text-white"><i class="ph ph-power text-lg" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">Actually starts</h3>
+          <p class="mt-1.5 text-sm text-ink-soft leading-relaxed">Every day, right on schedule. Mostly.</p>
         </div>
 
-        <div class="reveal" style="--reveal-delay:100ms">
-          <h2 class="text-2xl font-semibold tracking-tight text-ink">In progress</h2>
-          <p class="mt-2 text-sm text-ink-faint">chunk format patched, still shaky</p>
-          <ul class="mt-6 space-y-3 font-mono text-[13.5px] text-ink-soft">
-            <li>Terrain renders (client still sees void)</li>
-            <li>Camera moves (chunk streaming added, still broken)</li>
-          </ul>
+        <div class="card rounded-2xl p-6 reveal" style="--reveal-delay:60ms">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-grass-500 text-white"><i class="ph ph-users-three text-lg" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">People can join</h3>
+          <p class="mt-1.5 text-sm text-ink-soft leading-relaxed">The server believes in itself, and so should you.</p>
         </div>
 
-        <div class="reveal" style="--reveal-delay:200ms">
-          <h2 class="text-2xl font-semibold tracking-tight text-ink">Not yet</h2>
-          <p class="mt-2 text-sm text-ink-faint">soon, maybe, who knows</p>
-          <ul class="mt-6 space-y-3 font-mono text-[13.5px] text-ink-faint">
-            <li>Nether (who needs it)</li>
-            <li>Working game</li>
-          </ul>
+        <div class="card rounded-2xl p-6 reveal" style="--reveal-delay:120ms">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-grass-500 text-white"><i class="ph ph-mountains text-lg" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">Terrain generates</h3>
+          <p class="mt-1.5 text-sm text-ink-soft leading-relaxed">Somewhere. The client has not confirmed this.</p>
+        </div>
+
+        <div class="card rounded-2xl p-6 reveal" style="--reveal-delay:100ms">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-grass-200 text-grass-700"><i class="ph ph-brackets-curly text-lg" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">Plugin API</h3>
+          <p class="mt-1.5 text-sm text-ink-soft leading-relaxed">We wrote it, so yes, it works. Trust us.</p>
+        </div>
+
+        <div class="card rounded-2xl p-6 reveal" style="--reveal-delay:160ms">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-grass-200 text-grass-700"><i class="ph ph-cat text-lg" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">Mobs that exist</h3>
+          <p class="mt-1.5 text-sm text-ink-soft leading-relaxed">They exist. Somewhere. Probably loaded.</p>
+        </div>
+
+        <div class="card rounded-2xl p-6 reveal" style="--reveal-delay:220ms">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-paper-200 text-ink-faint"><i class="ph ph-grid-four text-lg" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">Nether</h3>
+          <p class="mt-1.5 text-sm text-ink-soft leading-relaxed">Who needs it. Asked the server, no comment.</p>
         </div>
       </div>
     </section>
 
+    <!-- Checklist: vib-MC vs vanilla -->
+    <section id="checklist" class="pt-10 pb-16">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-ink leading-tight">Feature checklist</h2>
+        <p class="mt-4 text-base text-ink-soft leading-relaxed">
+          Straight from the README, without a filter. Side by side with the vanilla server, because comparison is fair.
+        </p>
+      </div>
+
+      <div class="card rounded-2xl overflow-x-auto mt-10 reveal">
+        <table class="w-full text-left font-mono text-[13.5px]">
+          <thead>
+            <tr class="border-b border-line bg-paper-200 text-[12px] uppercase tracking-[0.12em] text-ink-faint">
+              <th class="px-5 py-3 font-bold">feature</th>
+              <th class="px-5 py-3 font-bold text-grass-700">vib-MC</th>
+              <th class="px-5 py-3 font-bold">vanilla</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line">
+            <tr>
+              <td class="px-5 py-3.5 font-semibold text-ink">Actually starts</td>
+              <td class="px-5 py-3.5 text-grass-700"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+              <td class="px-5 py-3.5 text-ink"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-semibold text-ink">People can join</td>
+              <td class="px-5 py-3.5 text-grass-700"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+              <td class="px-5 py-3.5 text-ink"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-semibold text-ink">Terrain renders</td>
+              <td class="px-5 py-3.5"><span class="text-amber-600"><i class="ph ph-warning text-base" aria-hidden="true"></i></span> <span class="text-ink-faint ml-1">client sees void</span></td>
+              <td class="px-5 py-3.5 text-ink"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-semibold text-ink">Camera moves</td>
+              <td class="px-5 py-3.5"><span class="text-amber-600"><i class="ph ph-warning text-base" aria-hidden="true"></i></span> <span class="text-ink-faint ml-1">streaming added, still broken</span></td>
+              <td class="px-5 py-3.5 text-ink"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-semibold text-ink">Nether</td>
+              <td class="px-5 py-3.5"><span class="text-ink-faint"><i class="ph ph-x text-base" aria-hidden="true"></i></span> <span class="text-ink-faint ml-1">who needs it</span></td>
+              <td class="px-5 py-3.5 text-ink"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-semibold text-ink">Written by humans</td>
+              <td class="px-5 py-3.5"><span class="text-ink-faint"><i class="ph ph-x text-base" aria-hidden="true"></i></span> <span class="text-ink-faint ml-1">one prompt at a time</span></td>
+              <td class="px-5 py-3.5 text-ink"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3.5 font-semibold text-ink">Working game</td>
+              <td class="px-5 py-3.5"><span class="text-ink-faint"><i class="ph ph-x text-base" aria-hidden="true"></i></span> <span class="text-ink-faint ml-1">soon</span></td>
+              <td class="px-5 py-3.5 text-ink"><i class="ph ph-check text-base" aria-hidden="true"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- Quickstart -->
-    <section id="quickstart" class="py-24 md:py-32">
-      <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
-        <div class="reveal lg:sticky lg:top-24">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink leading-tight">Up and running in two commands</h2>
+    <section id="quickstart" class="py-10">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-ink leading-tight">Up and running in two commands</h2>
+        <p class="mt-4 text-base text-ink-soft leading-relaxed">
+          Build with Gradle, drop the jar in a folder, run it. Server starts on port
+          25565 by default. Edit server.properties after the first run.
+        </p>
+      </div>
+
+      <div class="card rounded-2xl overflow-hidden mt-10 reveal">
+        <div class="px-6 py-3 border-b border-line bg-paper-200 font-mono text-[12px] uppercase tracking-[0.12em] text-ink-faint">
+          quickstart
+        </div>
+        <pre class="p-6 font-mono text-[13.5px] leading-7 text-ink overflow-x-auto"><code><span class="text-ink-faint">$</span> gradle build
+<span class="text-ink-faint">$</span> java -jar build/libs/vib-mc.jar</code></pre>
+        <button id="copy-btn" class="w-full border-t border-line px-6 py-3 font-mono text-[12px] uppercase tracking-[0.12em] text-ink-faint hover:text-grass-700 hover:bg-grass-100 transition-colors flex items-center justify-center gap-2">
+          <span id="copy-label">copy commands</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Commands -->
+    <section id="commands" class="py-10">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-ink leading-tight">Slash commands</h2>
+        <p class="mt-4 text-base text-ink-soft leading-relaxed">
+          The full command surface, short and honest. Click one to copy it.
+        </p>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3 font-mono text-[13px]">
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full">/help</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:40ms">/tp</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:80ms">/gamemode</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:120ms">/time</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:160ms">/weather</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:200ms">/give</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:240ms">/kill</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:280ms">/say</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:320ms">/seed</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:360ms">/save-all</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:400ms">/stop</button>
+        <button class="copy-cmd reveal btn px-4 py-2 rounded-full" style="--reveal-delay:440ms">/list</button>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="py-10">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div class="reveal">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-ink leading-tight">Internal structure</h2>
           <p class="mt-4 text-base text-ink-soft leading-relaxed max-w-[65ch]">
-            Build with Gradle, drop the jar in a folder, run it. Server starts on port
-            25565 by default. Edit server.properties after the first run.
+            Nine packages, zero humans. The whole thing was coaxed into existence
+            with prompts, then patched with more prompts.
           </p>
           <p class="mt-5 font-mono text-[13px] text-ink-faint">
             requires <span class="text-ink font-bold">java 11</span> or newer
           </p>
         </div>
-
-        <div class="reveal mc-panel overflow-hidden" style="--reveal-delay:120ms">
-          <pre class="p-5 font-mono text-[13.5px] leading-7 text-ink overflow-x-auto"><code><span class="text-ink-faint">$</span> gradle build
-<span class="text-ink-faint">$</span> java -jar build/libs/vib-mc.jar</code></pre>
-          <button id="copy-btn" class="w-full border-t-2 border-line px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.12em] text-ink-faint hover:text-ink hover:bg-paper-200 transition-colors flex items-center justify-center gap-2">
-            <span id="copy-label">copy commands</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Commands -->
-    <section id="commands" class="pb-24 md:pb-32">
-      <div class="reveal max-w-2xl">
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink">Slash commands</h2>
-        <p class="mt-4 text-base text-ink-soft leading-relaxed max-w-[65ch]">
-          The full command surface, short and honest. Click one to copy it.
-        </p>
-      </div>
-      <div class="mt-10 flex flex-wrap gap-3 font-mono text-[13px]">
-        <button class="copy-cmd reveal mc-btn px-4 py-2">/help</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:40ms">/tp</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:80ms">/gamemode</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:120ms">/time</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:160ms">/weather</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:200ms">/give</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:240ms">/kill</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:280ms">/say</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:320ms">/seed</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:360ms">/save-all</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:400ms">/stop</button>
-        <button class="copy-cmd reveal mc-btn px-4 py-2" style="--reveal-delay:440ms">/list</button>
-      </div>
-    </section>
-
-    <!-- Architecture -->
-    <section class="pb-24 md:pb-32">
-      <div class="grid lg:grid-cols-2 gap-10 items-start">
-        <div class="reveal">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink">Internal structure</h2>
-          <p class="mt-4 text-base text-ink-soft leading-relaxed max-w-[65ch]">
-            Nine packages, zero humans. The whole thing was coaxed into existence
-            with prompts, then patched with more prompts.
-          </p>
-        </div>
-        <div class="reveal mc-panel p-5 font-mono text-[13px] leading-8 text-ink overflow-x-auto" style="--reveal-delay:100ms">
+        <div class="card rounded-2xl p-6 font-mono text-[13px] leading-8 text-ink overflow-x-auto reveal" style="--reveal-delay:100ms">
 <pre>net.vibmc
 ├─ server       makes it go
 ├─ network      talks to minecraft
@@ -233,62 +305,89 @@
     </section>
 
     <!-- Releases -->
-    <section id="releases" class="pb-28">
-      <div class="reveal">
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink">Releases</h2>
-        <p class="mt-4 text-base text-ink-soft leading-relaxed max-w-[65ch]">
+    <section id="releases" class="py-10 pb-20">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-ink leading-tight">Releases</h2>
+        <p class="mt-4 text-base text-ink-soft leading-relaxed">
           Every jar, from first breath to latest patch. Sorted by vibe, then by version.
         </p>
       </div>
       <div class="mt-10 grid lg:grid-cols-3 gap-5">
 
-        <div class="reveal mc-panel p-6 flex flex-col">
-          <div class="flex items-center justify-between font-mono text-[12px] text-ink-faint">
-            <span>oldest</span>
-            <span class="px-2 py-0.5 border-2 border-line bg-paper-200">alpha</span>
+        <div class="card rounded-2xl p-6 flex flex-col reveal">
+          <div class="flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.12em] text-ink-faint">
+            <span>v0.0.1</span><span class="text-line">/</span><span>oldest</span>
           </div>
-          <p class="mt-4 font-mono text-3xl font-bold text-ink">v0.0.1</p>
-          <p class="mt-2 text-sm text-ink-soft leading-relaxed">First breath. Terrain generates, nobody knows where.</p>
+          <p class="mt-3 text-sm text-ink-soft leading-relaxed">First breath. Terrain generates, nobody knows where.</p>
           <p class="mt-4 font-mono text-[12px] text-ink-faint">requires java 21+</p>
           <a href="https://github.com/gabytz777/vib-MC/releases/tag/Alpha" target="_blank" rel="noopener"
-             class="mt-auto pt-5 font-mono text-[12px] font-bold text-ink-soft hover:text-grass-700 transition-colors">releases ↗</a>
+             class="mt-auto pt-5 font-mono text-[12.5px] font-bold text-ink-soft hover:text-grass-700 transition-colors inline-flex items-center gap-1.5">releases <i class="ph ph-arrow-up-right text-sm" aria-hidden="true"></i></a>
         </div>
 
-        <div class="reveal mc-panel p-6 flex flex-col border-grass-600 bg-grass-100" style="--reveal-delay:100ms">
-          <div class="flex items-center justify-between font-mono text-[12px] text-grass-700">
-            <span>latest stable</span>
-            <span class="px-2 py-0.5 border-2 border-line bg-grass-500 text-white">recommended</span>
+        <div class="rounded-2xl p-6 flex flex-col bg-grass-500 text-white reveal" style="--reveal-delay:100ms">
+          <div class="flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.12em] text-white/80">
+            <span id="version-stable">v0.0.2</span><span class="text-white/50">/</span><span>latest stable</span>
           </div>
-          <p class="mt-4 font-mono text-3xl font-bold text-grass-700" id="version-stable">v0.0.2</p>
-          <p class="mt-2 text-sm text-ink-soft leading-relaxed">The one you want. Java 11, connects, occasionally works.</p>
-          <p class="mt-4 font-mono text-[12px] text-ink-faint">requires java 11+</p>
+          <p class="mt-3 text-sm text-white/90 leading-relaxed">The one you want. java 11, connects, occasionally works.</p>
+          <p class="mt-4 font-mono text-[12px] text-white/80">requires java 11+</p>
           <a href="https://github.com/gabytz777/vib-MC/releases/tag/v0.0.2" target="_blank" rel="noopener"
-             class="mt-auto pt-5 font-mono text-[12px] font-bold text-grass-700 hover:text-grass-600 transition-colors">releases ↗</a>
+             class="mt-auto pt-5 font-mono text-[12.5px] font-bold text-white hover:text-white underline underline-offset-4 inline-flex items-center gap-1.5">releases <i class="ph ph-arrow-up-right text-sm" aria-hidden="true"></i></a>
         </div>
 
-        <div class="reveal mc-panel p-6 flex flex-col" style="--reveal-delay:200ms">
-          <div class="flex items-center justify-between font-mono text-[12px] text-ink-faint">
-            <span>edge</span>
-            <span class="px-2 py-0.5 border-2 border-line bg-paper-200">pre-release</span>
+        <div class="card rounded-2xl p-6 flex flex-col reveal" style="--reveal-delay:200ms">
+          <div class="flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.12em] text-ink-faint">
+            <span id="version-edge">v0.0.3</span><span class="text-line">/</span><span>edge</span>
           </div>
-          <p class="mt-4 font-mono text-3xl font-bold text-ink" id="version-edge">v0.0.3</p>
-          <p class="mt-2 text-sm text-ink-soft leading-relaxed">Cutting edge. Java 8 friendly, even less tested.</p>
+          <p class="mt-3 text-sm text-ink-soft leading-relaxed">Cutting edge. java 8 friendly, even less tested.</p>
           <p class="mt-4 font-mono text-[12px] text-ink-faint">requires java 8+</p>
           <a href="https://github.com/gabytz777/vib-MC/releases/tag/v0.0.3" target="_blank" rel="noopener"
-             class="mt-auto pt-5 font-mono text-[12px] font-bold text-ink-soft hover:text-grass-700 transition-colors">releases ↗</a>
+             class="mt-auto pt-5 font-mono text-[12.5px] font-bold text-ink-soft hover:text-grass-700 transition-colors inline-flex items-center gap-1.5">releases <i class="ph ph-arrow-up-right text-sm" aria-hidden="true"></i></a>
         </div>
 
       </div>
     </section>
+
+    <!-- CTA -->
+    <section class="pb-20">
+      <div class="rounded-2xl bg-grass-600 px-8 md:px-12 py-12 md:py-14 text-center reveal">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">Ready to vibe?</h2>
+        <p class="mt-4 text-base md:text-lg text-white/85 leading-relaxed max-w-[55ch] mx-auto">
+          Download vib-MC and experience a Minecraft server written entirely by AI.
+          No humans were involved in this decision.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="#" id="download-btn-cta" data-fallback-url="https://github.com/gabytz777/vib-MC/releases/download/v0.0.2/vib-mc.jar"
+             class="btn px-7 py-3.5 bg-white border-white text-ink hover:bg-grass-100 hover:border-white hover:text-ink">
+            <i class="ph ph-download" aria-hidden="true"></i>
+            <span>Download .jar</span>
+          </a>
+          <a href="https://github.com/gabytz777/vib-MC" target="_blank" rel="noopener"
+             class="btn px-7 py-3.5 border-white/50 text-white hover:border-white hover:text-white">
+            star on github
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="border-t-2 border-line bg-paper-200">
-    <div class="max-w-[1400px] mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-mono text-[12.5px] text-ink-faint">
-      <p>MIT licensed. Do whatever you want with this AI-generated mess.</p>
-      <div class="flex items-center gap-6">
-        <a href="https://github.com/gabytz777/vib-MC" target="_blank" rel="noopener" class="hover:text-ink transition-colors">github</a>
-        <a href="https://github.com/gabytz777/vib-MC/releases" target="_blank" rel="noopener" class="hover:text-ink transition-colors">releases ↗</a>
-        <a href="#top" class="hover:text-ink transition-colors">back to top ↑</a>
+  <footer class="border-t border-line">
+    <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-10 flex flex-col gap-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+          <span class="h-5 w-5 rounded-[4px] bg-grass-500 shadow-[inset_0_0_0_2px_oklch(1_0_0/0.7)]" aria-hidden="true"></span>
+          <span class="font-pixel text-[11px] text-ink">vib-MC</span>
+        </div>
+        <nav class="flex flex-wrap items-center gap-6 font-mono text-[12.5px] text-ink-faint">
+          <a href="https://github.com/gabytz777/vib-MC" target="_blank" rel="noopener" class="hover:text-ink transition-colors">github</a>
+          <a href="https://github.com/gabytz777/vib-MC/releases" target="_blank" rel="noopener" class="hover:text-ink transition-colors">releases ↗</a>
+          <a href="https://github.com/gabytz777/vib-MC/issues" target="_blank" rel="noopener" class="hover:text-ink transition-colors">report a bug</a>
+          <a href="#top" class="hover:text-ink transition-colors">back to top ↑</a>
+        </nav>
+      </div>
+      <div class="pt-6 border-t border-line flex flex-wrap items-center justify-between gap-3 font-mono text-[12px] text-ink-faint">
+        <p>MIT licensed. Do whatever you want with this AI-generated mess.</p>
+        <p>Made with prompts. No humans were involved.</p>
       </div>
     </div>
   </footer>

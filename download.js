@@ -4,7 +4,10 @@
   const REPO = "gabytz777/vib-MC";
   const API = `https://api.github.com/repos/${REPO}/releases`;
 
-  const downloadBtn = document.getElementById("download-btn");
+  const downloadBtns = [
+    document.getElementById("download-btn"),
+    document.getElementById("download-btn-cta"),
+  ].filter(Boolean);
   const downloadLabel = document.getElementById("download-label");
   const releaseTag = document.getElementById("release-tag");
   const releaseDate = document.getElementById("release-date");
@@ -39,10 +42,12 @@
   const applyRelease = (release, jar, kind) => {
     const href = jar ? jar.browser_download_url : null;
     if (kind === "stable") {
-      if (href && downloadBtn) {
-        downloadBtn.href = href;
-        downloadBtn.removeAttribute("data-fallback");
-      }
+      downloadBtns.forEach((btn) => {
+        if (href && btn) {
+          btn.href = href;
+          btn.removeAttribute("data-fallback");
+        }
+      });
       if (downloadLabel && release) {
         downloadLabel.textContent = `Download ${release.tag_name}`;
       }
@@ -70,8 +75,10 @@
       if (edge) applyRelease(edge, firstJar(edge), "edge");
     })
     .catch(() => {
-      const fallback = downloadBtn && downloadBtn.getAttribute("data-fallback-url");
-      if (fallback) downloadBtn.href = fallback;
+      downloadBtns.forEach((btn) => {
+        const fallback = btn && btn.getAttribute("data-fallback-url");
+        if (fallback) btn.href = fallback;
+      });
       applyRelease(null, null, "stable");
       if (versionEdge) versionEdge.textContent = "v0.0.3";
     });
