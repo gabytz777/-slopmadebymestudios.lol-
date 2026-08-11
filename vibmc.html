@@ -348,6 +348,60 @@
       </div>
     </section>
 
+    <!-- Bug report -->
+    <section id="bug-report" class="py-10 pb-20">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-50 leading-tight">Report a bug</h2>
+        <p class="mt-4 text-base text-zinc-400 leading-relaxed">
+          Fill this in and it opens a GitHub issue with everything we need.
+          Keep it short, we are also an AI.
+        </p>
+      </div>
+
+      <form id="bug-form" class="card rounded-2xl mt-10 p-6 md:p-8 reveal space-y-6">
+        <div>
+          <label for="bug-title" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">1. the issue in one short sentence</label>
+          <input id="bug-title" name="title" type="text" required maxlength="90"
+                 class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors"
+                 placeholder="e.g. server crashes when i use /give">
+        </div>
+
+        <div>
+          <label for="bug-what" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">2. what's the issue?</label>
+          <textarea id="bug-what" name="what" rows="3" required
+                    class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors resize-y"
+                    placeholder="what you saw, what you expected"></textarea>
+        </div>
+
+        <div>
+          <label for="bug-steps" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">3. how did it occur?</label>
+          <textarea id="bug-steps" name="steps" rows="3" required
+                    class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors resize-y"
+                    placeholder="steps so we can replicate it"></textarea>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label for="bug-version" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">release version</label>
+            <input id="bug-version" name="version" type="text" value="v0.0.2"
+                   class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
+          </div>
+          <div>
+            <label for="bug-log" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">server log</label>
+            <input id="bug-log" name="log" type="text" placeholder="paste or link the log"
+                   class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary px-6 py-3">
+            <i class="ph ph-bug" aria-hidden="true"></i>
+            open github issue
+          </button>
+        </div>
+      </form>
+    </section>
+
     <!-- CTA -->
     <section class="pb-20">
       <div class="rounded-2xl bg-ember-400 px-8 md:px-12 py-12 md:py-14 text-center reveal">
@@ -377,7 +431,7 @@
         <nav class="flex flex-wrap items-center gap-6 font-mono text-[12.5px] text-zinc-500">
           <a href="https://github.com/gabytz777/vib-MC" target="_blank" rel="noopener" class="hover:text-zinc-100 transition-colors">github</a>
           <a href="https://github.com/gabytz777/vib-MC/releases" target="_blank" rel="noopener" class="hover:text-zinc-100 transition-colors">releases ↗</a>
-          <a href="https://github.com/gabytz777/vib-MC/issues" target="_blank" rel="noopener" class="hover:text-zinc-100 transition-colors">report a bug</a>
+          <a href="#bug-report" class="hover:text-zinc-100 transition-colors">report a bug</a>
           <a href="#top" class="hover:text-zinc-100 transition-colors">back to top ↑</a>
         </nav>
       </div>

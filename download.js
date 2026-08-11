@@ -119,6 +119,33 @@
     });
   });
 
+  const bugForm = document.getElementById("bug-form");
+  if (bugForm) {
+    const bugTitle = document.getElementById("bug-title");
+    const bugWhat = document.getElementById("bug-what");
+    const bugSteps = document.getElementById("bug-steps");
+    const bugVersion = document.getElementById("bug-version");
+    const bugLog = document.getElementById("bug-log");
+
+    bugForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const title = (bugTitle && bugTitle.value.trim()) || "bug report";
+      const body = [
+        "# What's the issue?",
+        (bugWhat && bugWhat.value.trim()) || "",
+        "",
+        "# How did it occur?",
+        (bugSteps && bugSteps.value.trim()) || "",
+        "",
+        "# Version & log",
+        `Release: ${(bugVersion && bugVersion.value.trim()) || "unknown"}`,
+        `Log: ${(bugLog && bugLog.value.trim()) || "not provided"}`,
+      ].join("\n");
+      const url = `https://github.com/gabytz777/vib-MC/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+      window.open(url, "_blank", "noopener");
+    });
+  }
+
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!prefersReduced && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(
