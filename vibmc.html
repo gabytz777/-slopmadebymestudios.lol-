@@ -387,9 +387,10 @@
                    class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
           </div>
           <div>
-            <label for="bug-log" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">server log</label>
-            <input id="bug-log" name="log" type="text" placeholder="paste or link the log"
-                   class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
+            <label for="bug-log" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">server log output</label>
+            <textarea id="bug-log" name="log" rows="4"
+                      class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-[12.5px] leading-relaxed text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors resize-y"
+                      placeholder="paste the raw log output from the server console"></textarea>
           </div>
         </div>
 
