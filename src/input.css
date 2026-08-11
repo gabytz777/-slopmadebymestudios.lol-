@@ -9,21 +9,16 @@
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
   --font-pixel: "Press Start 2P", ui-monospace, monospace;
 
-  --color-paper: oklch(0.955 0.01 95);
-  --color-paper-100: oklch(0.985 0.004 95);
-  --color-paper-200: oklch(0.92 0.015 95);
-  --color-paper-300: oklch(0.87 0.02 95);
-  --color-ink: oklch(0.24 0.02 130);
-  --color-ink-soft: oklch(0.4 0.02 130);
-  --color-ink-faint: oklch(0.55 0.02 130);
-  --color-line: oklch(0.82 0.015 95);
-  --color-grass-100: oklch(0.94 0.045 130);
-  --color-grass-200: oklch(0.88 0.075 130);
-  --color-grass-300: oklch(0.8 0.11 130);
-  --color-grass-400: oklch(0.72 0.13 130);
-  --color-grass-500: oklch(0.62 0.15 130);
-  --color-grass-600: oklch(0.52 0.145 130);
-  --color-grass-700: oklch(0.42 0.125 130);
+  --color-void-950: oklch(0.13 0.02 40);
+  --color-void-900: oklch(0.17 0.02 40);
+  --color-void-800: oklch(0.22 0.02 40);
+  --color-void-700: oklch(0.28 0.02 40);
+  --color-ember-300: oklch(0.8 0.16 45);
+  --color-ember-400: oklch(0.72 0.17 40);
+  --color-ember-500: oklch(0.64 0.19 40);
+  --color-ember-600: oklch(0.55 0.19 40);
+  --color-ember-700: oklch(0.46 0.17 40);
+  --color-line: oklch(0.24 0.02 40);
 
   --animate-marquee: marquee 30s linear infinite;
 
@@ -38,21 +33,21 @@
     scroll-behavior: smooth;
   }
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--color-void-950);
+    color: oklch(0.92 0.01 40);
   }
   ::selection {
-    background: var(--color-grass-500);
-    color: oklch(1 0 0);
+    background: var(--color-ember-400);
+    color: var(--color-void-950);
   }
 }
 
 @layer components {
   .card {
-    background-color: var(--color-paper-100);
+    background-color: var(--color-void-900);
     border: 1px solid var(--color-line);
-    box-shadow: 0 1px 2px oklch(0.3 0.03 130 / 0.06),
-      0 10px 30px -18px oklch(0.3 0.03 130 / 0.25);
+    box-shadow: 0 1px 2px oklch(0 0 0 / 0.3),
+      0 10px 30px -18px oklch(0 0 0 / 0.6);
   }
   .btn {
     display: inline-flex;
@@ -60,30 +55,30 @@
     gap: 0.5rem;
     border-radius: 9999px;
     border: 1px solid var(--color-line);
-    background-color: var(--color-paper-100);
-    color: var(--color-ink);
+    background-color: var(--color-void-900);
+    color: oklch(0.85 0.02 40);
     font-family: var(--font-mono);
     font-size: 14px;
     font-weight: 600;
     transition: background-color 120ms ease, color 120ms ease, transform 80ms ease, border-color 120ms ease;
   }
   .btn:hover {
-    border-color: var(--color-grass-500);
-    color: var(--color-grass-700);
+    border-color: var(--color-ember-500);
+    color: var(--color-ember-300);
     transform: translateY(-1px);
   }
   .btn:active {
     transform: translateY(1px);
   }
   .btn-primary {
-    background-color: var(--color-grass-500);
-    border-color: var(--color-grass-500);
-    color: oklch(1 0 0);
+    background-color: var(--color-ember-400);
+    border-color: var(--color-ember-400);
+    color: var(--color-void-950);
   }
   .btn-primary:hover {
-    background-color: var(--color-grass-600);
-    border-color: var(--color-grass-600);
-    color: oklch(1 0 0);
+    background-color: var(--color-ember-300);
+    border-color: var(--color-ember-300);
+    color: var(--color-void-950);
   }
 
   .reveal {
