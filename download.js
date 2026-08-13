@@ -3,6 +3,8 @@
 
   const REPO = "gabytz777/vib-MC";
   const API = `https://api.github.com/repos/${REPO}/releases`;
+  const LATEST_FALLBACK = "v0.0.3";
+  const LATEST_FALLBACK_URL = `https://github.com/${REPO}/releases/download/${LATEST_FALLBACK}/vib-mc.jar`;
 
   const downloadBtns = [
     document.getElementById("download-btn"),
@@ -41,20 +43,25 @@
 
   const applyRelease = (release, jar, kind) => {
     const href = jar ? jar.browser_download_url : null;
-    if (kind === "stable") {
+    if (kind === "latest") {
       downloadBtns.forEach((btn) => {
         if (href && btn) {
           btn.href = href;
-          btn.removeAttribute("data-fallback");
+          btn.removeAttribute("data-fallback-url");
         }
       });
       if (downloadLabel && release) {
         downloadLabel.textContent = `Download ${release.tag_name}`;
       }
-      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.2";
+      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || LATEST_FALLBACK;
       if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
       if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
       if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body);
+      if (versionStable && release) {
+        versionStable.textContent = release.tag_name;
+        const label = versionStable.nextElementSibling && versionStable.nextElementSibling.nextElementSibling;
+        if (label) label.textContent = "latest release";
+      }
     }
     if (kind === "edge" && versionEdge && release) {
       versionEdge.textContent = release.tag_name;
@@ -68,19 +75,25 @@
     })
     .then((releases) => {
       if (!Array.isArray(releases) || releases.length === 0) throw new Error("no releases");
-      const stable = releases.find((rel) => !rel.prerelease && !rel.draft) || releases[0];
-      const edge = releases.find((rel) => rel.prerelease);
+      const latest = releases.find((rel) => !rel.draft) || releases[0];
+      const edge = releases.find((rel) => rel.prerelease && rel.tag_name !== latest.tag_name);
 
-      applyRelease(stable, firstJar(stable), "stable");
+      applyRelease(latest, firstJar(latest), "latest");
       if (edge) applyRelease(edge, firstJar(edge), "edge");
     })
     .catch(() => {
       downloadBtns.forEach((btn) => {
-        const fallback = btn && btn.getAttribute("data-fallback-url");
-        if (fallback) btn.href = fallback;
+        if (btn) btn.href = LATEST_FALLBACK_URL;
       });
-      applyRelease(null, null, "stable");
-      if (versionEdge) versionEdge.textContent = "v0.0.3";
+      applyRelease(null, null, "latest");
+      if (releaseTag) releaseTag.textContent = LATEST_FALLBACK;
+      if (downloadLabel) downloadLabel.textContent = `Download ${LATEST_FALLBACK}`;
+      if (versionStable) {
+        versionStable.textContent = LATEST_FALLBACK;
+        const label = versionStable.nextElementSibling && versionStable.nextElementSibling.nextElementSibling;
+        if (label) label.textContent = "latest release";
+      }
+      if (versionEdge) versionEdge.textContent = "v0.0.2";
     });
 
   const copyText = async (text) => {
