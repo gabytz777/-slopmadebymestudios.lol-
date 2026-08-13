@@ -17,6 +17,21 @@
   const releaseNotes = document.getElementById("release-notes");
   const versionStable = document.getElementById("version-stable");
   const versionEdge = document.getElementById("version-edge");
+  const bugVersion = document.getElementById("bug-version");
+
+  // Set the website to 0.0.3 immediately, before GitHub's API responds.
+  if (releaseTag) releaseTag.textContent = LATEST_FALLBACK;
+  if (downloadLabel) downloadLabel.textContent = `Download ${LATEST_FALLBACK}`;
+  if (versionStable) {
+    versionStable.textContent = LATEST_FALLBACK;
+    const label = versionStable.nextElementSibling && versionStable.nextElementSibling.nextElementSibling;
+    if (label) label.textContent = "latest release";
+  }
+  if (versionEdge) versionEdge.textContent = "v0.0.2";
+  if (bugVersion) bugVersion.value = LATEST_FALLBACK;
+  downloadBtns.forEach((btn) => {
+    btn.href = LATEST_FALLBACK_URL;
+  });
 
   const fmtSize = (bytes) => {
     if (!Number.isFinite(bytes)) return "-";
@@ -62,6 +77,7 @@
         const label = versionStable.nextElementSibling && versionStable.nextElementSibling.nextElementSibling;
         if (label) label.textContent = "latest release";
       }
+      if (bugVersion && release) bugVersion.value = release.tag_name;
     }
     if (kind === "edge" && versionEdge && release) {
       versionEdge.textContent = release.tag_name;
@@ -75,7 +91,12 @@
     })
     .then((releases) => {
       if (!Array.isArray(releases) || releases.length === 0) throw new Error("no releases");
-      const latest = releases.find((rel) => !rel.draft) || releases[0];
+
+      // Explicitly select v0.0.3 as the latest release. Do not let GitHub's
+      // release ordering accidentally make an older release the website's latest.
+      const latest = releases.find((rel) => rel.tag_name === LATEST_FALLBACK && !rel.draft) ||
+        releases.find((rel) => !rel.draft && !rel.prerelease) ||
+        releases[0];
       const edge = releases.find((rel) => rel.prerelease && rel.tag_name !== latest.tag_name);
 
       applyRelease(latest, firstJar(latest), "latest");
@@ -85,7 +106,6 @@
       downloadBtns.forEach((btn) => {
         if (btn) btn.href = LATEST_FALLBACK_URL;
       });
-      applyRelease(null, null, "latest");
       if (releaseTag) releaseTag.textContent = LATEST_FALLBACK;
       if (downloadLabel) downloadLabel.textContent = `Download ${LATEST_FALLBACK}`;
       if (versionStable) {
@@ -94,6 +114,7 @@
         if (label) label.textContent = "latest release";
       }
       if (versionEdge) versionEdge.textContent = "v0.0.2";
+      if (bugVersion) bugVersion.value = LATEST_FALLBACK;
     });
 
   const copyText = async (text) => {
@@ -137,7 +158,6 @@
     const bugTitle = document.getElementById("bug-title");
     const bugWhat = document.getElementById("bug-what");
     const bugSteps = document.getElementById("bug-steps");
-    const bugVersion = document.getElementById("bug-version");
     const bugLog = document.getElementById("bug-log");
 
     bugForm.addEventListener("submit", (e) => {
@@ -151,7 +171,7 @@
         (bugSteps && bugSteps.value.trim()) || "",
         "",
         "# Version & log",
-        `Release: ${(bugVersion && bugVersion.value.trim()) || "unknown"}`,
+        `Release: ${(bugVersion && bugVersion.value.trim()) || LATEST_FALLBACK}`,
         `Log: ${(bugLog && bugLog.value.trim()) || "not provided"}`,
       ].join("\n");
       const url = `https://github.com/gabytz777/vib-MC/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
