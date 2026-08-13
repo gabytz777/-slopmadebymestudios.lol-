@@ -3,8 +3,6 @@
 
   const REPO = "gabytz777/vib-MC";
   const API = `https://api.github.com/repos/${REPO}/releases`;
-  const LATEST_FALLBACK = "v0.0.3";
-  const LATEST_FALLBACK_URL = `https://github.com/${REPO}/releases/download/${LATEST_FALLBACK}/vib-mc.jar`;
 
   const downloadBtns = [
     document.getElementById("download-btn"),
@@ -43,25 +41,24 @@
 
   const applyRelease = (release, jar, kind) => {
     const href = jar ? jar.browser_download_url : null;
-    if (kind === "latest") {
+    if (kind === "stable") {
       downloadBtns.forEach((btn) => {
         if (href && btn) {
           btn.href = href;
-          btn.removeAttribute("data-fallback-url");
+          btn.removeAttribute("data-fallback");
         }
       });
-      if (downloadLabel) downloadLabel.textContent = `Download ${LATEST_FALLBACK}`;
-      if (releaseTag) releaseTag.textContent = LATEST_FALLBACK;
+      if (downloadLabel && release) {
+        downloadLabel.textContent = `Download ${release.tag_name}`;
+      }
+      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.2";
       if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
       if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
       if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body);
-      if (versionStable) {
-        versionStable.textContent = LATEST_FALLBACK;
-        const label = versionStable.nextElementSibling && versionStable.nextElementSibling.nextElementSibling;
-        if (label) label.textContent = "latest release";
-      }
     }
-    if (kind === "edge" && versionEdge && release) versionEdge.textContent = release.tag_name;
+    if (kind === "edge" && versionEdge && release) {
+      versionEdge.textContent = release.tag_name;
+    }
   };
 
   window.fetch(API)
@@ -71,35 +68,56 @@
     })
     .then((releases) => {
       if (!Array.isArray(releases) || releases.length === 0) throw new Error("no releases");
-      const latest = releases.find((rel) => rel.tag_name === LATEST_FALLBACK && !rel.draft) || releases.find((rel) => !rel.draft && !rel.prerelease) || releases[0];
-      const edge = releases.find((rel) => rel.prerelease && rel.tag_name !== latest.tag_name);
-      applyRelease(latest, firstJar(latest), "latest");
+      const stable = releases.find((rel) => !rel.prerelease && !rel.draft) || releases[0];
+      const edge = releases.find((rel) => rel.prerelease);
+
+      applyRelease(stable, firstJar(stable), "stable");
       if (edge) applyRelease(edge, firstJar(edge), "edge");
     })
     .catch(() => {
-      downloadBtns.forEach((btn) => { if (btn) btn.href = LATEST_FALLBACK_URL; });
-      applyRelease(null, null, "latest");
+      downloadBtns.forEach((btn) => {
+        const fallback = btn && btn.getAttribute("data-fallback-url");
+        if (fallback) btn.href = fallback;
+      });
+      applyRelease(null, null, "stable");
       if (versionEdge) versionEdge.textContent = "v0.0.3";
     });
 
   const copyText = async (text) => {
-    try { await navigator.clipboard.writeText(text); }
-    catch {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
       const ta = document.createElement("textarea");
-      ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
     }
   };
 
   const copyBtn = document.getElementById("copy-btn");
   const copyLabel = document.getElementById("copy-label");
-  if (copyBtn) copyBtn.addEventListener("click", async () => {
-    await copyText("gradle build\njava -jar build/libs/vib-mc.jar");
-    if (copyLabel) { const prev = copyLabel.textContent; copyLabel.textContent = "copied ✓"; window.setTimeout(() => { copyLabel.textContent = prev; }, 1600); }
-  });
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      await copyText("gradle build\njava -jar build/libs/vib-mc.jar");
+      if (copyLabel) {
+        const prev = copyLabel.textContent;
+        copyLabel.textContent = "copied ✓";
+        window.setTimeout(() => { copyLabel.textContent = prev; }, 1600);
+      }
+    });
+  }
 
-  document.querySelectorAll(".copy-cmd").forEach((btn) => btn.addEventListener("click", async () => {
-    const cmd = btn.textContent.trim(); await copyText(cmd); const prev = btn.textContent; btn.textContent = "copied ✓"; window.setTimeout(() => { btn.textContent = prev; }, 1200);
-  }));
+  document.querySelectorAll(".copy-cmd").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const cmd = btn.textContent.trim();
+      await copyText(cmd);
+      const prev = btn.textContent;
+      btn.textContent = "copied ✓";
+      window.setTimeout(() => { btn.textContent = prev; }, 1200);
+    });
+  });
 
   const bugForm = document.getElementById("bug-form");
   if (bugForm) {
@@ -108,10 +126,21 @@
     const bugSteps = document.getElementById("bug-steps");
     const bugVersion = document.getElementById("bug-version");
     const bugLog = document.getElementById("bug-log");
+
     bugForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const title = (bugTitle && bugTitle.value.trim()) || "bug report";
-      const body = ["# What's the issue?", (bugWhat && bugWhat.value.trim()) || "", "", "# How did it occur?", (bugSteps && bugSteps.value.trim()) || "", "", "# Version & log", `Release: ${(bugVersion && bugVersion.value.trim()) || LATEST_FALLBACK}`, `Log: ${(bugLog && bugLog.value.trim()) || "not provided"}`].join("\n");
+      const body = [
+        "# What's the issue?",
+        (bugWhat && bugWhat.value.trim()) || "",
+        "",
+        "# How did it occur?",
+        (bugSteps && bugSteps.value.trim()) || "",
+        "",
+        "# Version & log",
+        `Release: ${(bugVersion && bugVersion.value.trim()) || "unknown"}`,
+        `Log: ${(bugLog && bugLog.value.trim()) || "not provided"}`,
+      ].join("\n");
       const url = `https://github.com/gabytz777/vib-MC/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
       window.open(url, "_blank", "noopener");
     });
@@ -119,7 +148,19 @@
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!prefersReduced && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); } }), { threshold: 0.18, rootMargin: "0px 0px -40px 0px" });
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: "0px 0px -40px 0px" }
+    );
     document.querySelectorAll(".reveal:not(.is-visible)").forEach((el) => io.observe(el));
-  } else document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+  } else {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+  }
 })();
