@@ -79,7 +79,7 @@
     .catch(() => {
       downloadBtns.forEach((btn) => { if (btn) btn.href = LATEST_FALLBACK_URL; });
       applyRelease(null, null, "latest");
-      if (versionEdge) versionEdge.textContent = "v0.0.2";
+      if (versionEdge) versionEdge.textContent = "v0.0.3";
     });
 
   const copyText = async (text) => {
