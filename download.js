@@ -14,7 +14,6 @@
   const releaseSize = document.getElementById("release-size");
   const releaseNotes = document.getElementById("release-notes");
   const versionStable = document.getElementById("version-stable");
-  const versionEdge = document.getElementById("version-edge");
 
   const fmtSize = (bytes) => {
     if (!Number.isFinite(bytes)) return "-";
@@ -51,13 +50,10 @@
       if (downloadLabel && release) {
         downloadLabel.textContent = `Download ${release.tag_name}`;
       }
-      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.2";
+      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.3";
       if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
       if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
       if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body);
-    }
-    if (kind === "edge" && versionEdge && release) {
-      versionEdge.textContent = release.tag_name;
     }
   };
 
@@ -69,10 +65,8 @@
     .then((releases) => {
       if (!Array.isArray(releases) || releases.length === 0) throw new Error("no releases");
       const stable = releases.find((rel) => !rel.prerelease && !rel.draft) || releases[0];
-      const edge = releases.find((rel) => rel.prerelease);
 
       applyRelease(stable, firstJar(stable), "stable");
-      if (edge) applyRelease(edge, firstJar(edge), "edge");
     })
     .catch(() => {
       downloadBtns.forEach((btn) => {
@@ -80,7 +74,6 @@
         if (fallback) btn.href = fallback;
       });
       applyRelease(null, null, "stable");
-      if (versionEdge) versionEdge.textContent = "v0.0.3";
     });
 
   const copyText = async (text) => {
