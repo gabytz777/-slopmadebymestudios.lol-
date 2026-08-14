@@ -50,7 +50,7 @@
       if (downloadLabel && release) {
         downloadLabel.textContent = `Download ${release.tag_name}`;
       }
-      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.3";
+      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.4";
       if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
       if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
       if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body);
