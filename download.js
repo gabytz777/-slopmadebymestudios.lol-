@@ -212,7 +212,7 @@
         <div class="sb-unit-blocks">
           <div class="sb-block ${hatClass} sb-hat">${hatHtml}</div>
         </div>
-        <button type="button" class="sb-remove" aria-label="remove">?</button>`;
+        <button type="button" class="sb-remove" aria-label="remove">&times;</button>`;
       unit.addEventListener("click", (e) => {
         if (!e.target.closest(".sb-remove")) setActive(unit);
       });
