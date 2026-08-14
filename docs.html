@@ -29,6 +29,7 @@
       <a href="#requirements" class="hover:text-zinc-100 transition-colors">requirements</a>
       <a href="#run" class="hover:text-zinc-100 transition-colors">run it</a>
       <a href="#plugins" class="hover:text-zinc-100 transition-colors">plugins</a>
+      <a href="#blueprint" class="hover:text-zinc-100 transition-colors">blueprint</a>
       <a href="#api" class="hover:text-zinc-100 transition-colors">api reference</a>
     </nav>
     <a href="vibmc.html" class="btn px-4 py-1.5 text-[13px]">back to vib-MC</a>
@@ -242,6 +243,84 @@ public class JoinListener implements Listener {
 }</code></pre>
           <pre class="mt-3 p-5 rounded-xl bg-void-800/60 font-mono text-[13px] leading-7 text-zinc-300 overflow-x-auto"><code>getPluginManager().registerEvents(new JoinListener(), this);</code></pre>
         </div>
+      </div>
+    </section>
+
+    <!-- Plugin blueprint -->
+    <section id="blueprint" class="py-10">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-50 leading-tight">Plugin blueprint</h2>
+        <p class="mt-4 text-base text-zinc-400 leading-relaxed">
+          Pick your pieces, get a complete plugin. Name it, snap scripts together,
+          and download a ready-to-build zip — no copy-paste, no code screens.
+        </p>
+      </div>
+
+      <div class="card rounded-2xl p-6 md:p-8 mt-8 reveal">
+        <h3 class="text-lg font-semibold tracking-tight text-zinc-50">1. The basics</h3>
+        <div class="mt-5 grid md:grid-cols-2 gap-5">
+          <div>
+            <label for="bp-name" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">plugin name</label>
+            <input id="bp-name" type="text" value="MyPlugin"
+                   class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
+          </div>
+          <div>
+            <label for="bp-package" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">package</label>
+            <input id="bp-package" type="text" value="com.example"
+                   class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
+          </div>
+          <div>
+            <label for="bp-version" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">version</label>
+            <input id="bp-version" type="text" value="1.0.0"
+                   class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
+          </div>
+          <div>
+            <label for="bp-description" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">description (optional)</label>
+            <input id="bp-description" type="text"
+                   class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors"
+                   placeholder="Does a thing, sometimes">
+          </div>
+        </div>
+
+        <div class="card rounded-2xl p-6 md:p-8 mt-6 reveal" style="--reveal-delay:80ms">
+        <h3 class="text-lg font-semibold tracking-tight text-zinc-50">2. Scripts</h3>
+        <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+          Snap pieces from the palette onto the scripts. The ✕ on a script removes it.
+        </p>
+
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button type="button" data-piece="cmd-say" class="sb-piece sb-cmd">+ when player runs /hello → say</button>
+          <button type="button" data-piece="cmd-gm" class="sb-piece sb-cmd">+ when player runs /gmc → set game mode</button>
+          <button type="button" data-piece="lsn-join" class="sb-piece sb-lsn">+ when player joins → say</button>
+          <button type="button" data-piece="lsn-quit" class="sb-piece sb-lsn">+ when player quits → say</button>
+          <button type="button" data-piece="lsn-cancel" class="sb-piece sb-lsn">+ when player chats → cancel</button>
+        </div>
+
+        <div class="mt-6 grid md:grid-cols-2 gap-5">
+          <div>
+            <div class="sb-stack-label">commands</div>
+            <div id="bp-commands" class="sb-stack"></div>
+          </div>
+          <div>
+            <div class="sb-stack-label">listeners</div>
+            <div id="bp-listeners" class="sb-stack"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rounded-2xl p-6 md:p-8 mt-6 reveal">
+        <h3 class="text-lg font-semibold tracking-tight text-zinc-50">3. Grab it</h3>
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+          <button type="button" id="bp-download" class="btn btn-primary px-6 py-3">download .zip</button>
+          <span class="font-mono text-[12px] text-zinc-500">plugin.yml + source + build scripts</span>
+        </div>
+        <p class="mt-4 text-sm text-zinc-400 leading-relaxed">
+          The zip bundles a build script that fetches
+          <code class="font-mono text-zinc-500">vib-mc.jar</code>, compiles, and packages your plugin.
+          Drop the resulting
+          <code class="font-mono text-zinc-500">MyPlugin.jar</code> into
+          <code class="font-mono text-zinc-500">plugins/</code>, restart the server, done.
+        </p>
       </div>
     </section>
 
