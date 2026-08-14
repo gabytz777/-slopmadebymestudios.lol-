@@ -63,7 +63,7 @@
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a href="#" id="download-btn" data-fallback-url="https://github.com/gabytz777/vib-MC/releases/download/v0.0.4-hotfix.1/vib-mc.jar"
+          <a href="#" id="download-btn" data-fallback-url="https://github.com/gabytz777/vib-MC/releases/download/v0.0.4-hotfix.2/vib-mc.jar"
              class="btn btn-primary px-7 py-3.5">
             <i class="ph ph-download" aria-hidden="true"></i>
             <span id="download-label">Download .jar</span>
@@ -82,7 +82,7 @@
           <span class="h-8 w-8 rounded-lg bg-ember-400 shadow-[inset_0_0_0_3px_oklch(0.13_0.02_40)]" aria-hidden="true"></span>
           <div>
             <p class="font-mono text-[12px] text-zinc-500">current release</p>
-            <p id="release-tag" class="font-mono text-lg font-bold text-zinc-100">v0.0.4-hotfix.1</p>
+            <p id="release-tag" class="font-mono text-lg font-bold text-zinc-100">v0.0.4-hotfix.2</p>
           </div>
         </div>
         <dl class="mt-6 grid grid-cols-3 gap-4">
@@ -339,11 +339,11 @@
 
         <div class="rounded-2xl p-6 flex flex-col bg-ember-400 text-void-950 reveal" style="--reveal-delay:100ms">
           <div class="flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.12em] text-void-950/70">
-            <span id="version-stable">v0.0.4-hotfix.1</span><span class="text-void-950/40">/</span><span>latest stable</span>
+            <span id="version-stable">v0.0.4-hotfix.2</span><span class="text-void-950/40">/</span><span>latest stable</span>
           </div>
           <p class="mt-3 text-sm text-void-950/80 leading-relaxed">The one you want. java 8 friendly, terrain actually renders, commands actually run.</p>
           <p class="mt-4 font-mono text-[12px] text-void-950/70">requires java 8+</p>
-          <a href="https://github.com/gabytz777/vib-MC/releases/tag/v0.0.4-hotfix.1" target="_blank" rel="noopener"
+          <a href="https://github.com/gabytz777/vib-MC/releases/tag/v0.0.4-hotfix.2" target="_blank" rel="noopener"
              class="mt-auto pt-5 font-mono text-[12.5px] font-bold text-void-950 underline underline-offset-4 inline-flex items-center gap-1.5">releases <i class="ph ph-arrow-up-right text-sm" aria-hidden="true"></i></a>
         </div>
 
@@ -360,17 +360,37 @@
       </div>
     </section>
 
-    <!-- Bug report -->
+    <!-- Have a request? -->
     <section id="bug-report" class="py-10 pb-20">
       <div class="max-w-2xl">
-        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-50 leading-tight">Report a bug</h2>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-50 leading-tight">Have a request?</h2>
         <p class="mt-4 text-base text-zinc-400 leading-relaxed">
-          Fill this in and it opens a GitHub issue with everything we need.
-          Keep it short, we are also an AI.
+          Bug, idea, or general feedback — pick one and it opens as a GitHub issue
+          using the real repo template. Keep it short, we are also an AI.
         </p>
       </div>
 
-      <form id="bug-form" class="card rounded-2xl mt-10 p-6 md:p-8 reveal space-y-6">
+      <div id="request-chooser" class="mt-10 grid md:grid-cols-2 gap-5">
+        <button type="button" data-form="bug"
+                class="card request-card rounded-2xl p-6 md:p-8 text-left reveal">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ember-400 text-void-950"><i class="ph ph-bug text-xl" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-zinc-50">Bug report</h3>
+          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Something is broken. Crash, glitch, or just weird.</p>
+        </button>
+        <button type="button" data-form="feedback"
+                class="card request-card rounded-2xl p-6 md:p-8 text-left reveal" style="--reveal-delay:80ms">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ember-400 text-void-950"><i class="ph ph-chats-circle text-xl" aria-hidden="true"></i></span>
+          <h3 class="mt-4 text-lg font-semibold tracking-tight text-zinc-50">Feedback / request</h3>
+          <p class="mt-2 text-sm text-zinc-400 leading-relaxed">An idea, a feature you want, or a pat on the back.</p>
+        </button>
+      </div>
+
+      <form id="bug-form" class="card rounded-2xl mt-10 p-6 md:p-8 reveal space-y-6 hidden">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-lg font-semibold tracking-tight text-zinc-50">Bug report</h3>
+          <button type="button" data-form-back
+                  class="font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-500 hover:text-ember-400 transition-colors">← back</button>
+        </div>
         <div>
           <label for="bug-title" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">1. the issue in one short sentence</label>
           <input id="bug-title" name="title" type="text" required maxlength="90"
@@ -395,7 +415,7 @@
         <div class="grid md:grid-cols-2 gap-6">
           <div>
             <label for="bug-version" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">release version</label>
-            <input id="bug-version" name="version" type="text" value="v0.0.4-hotfix.1"
+            <input id="bug-version" name="version" type="text" value="v0.0.4-hotfix.2"
                    class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors">
           </div>
           <div>
@@ -413,6 +433,48 @@
           </button>
         </div>
       </form>
+
+      <form id="feedback-form" class="card rounded-2xl mt-10 p-6 md:p-8 reveal space-y-6 hidden">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-lg font-semibold tracking-tight text-zinc-50">Feedback / request</h3>
+          <button type="button" data-form-back
+                  class="font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-500 hover:text-ember-400 transition-colors">← back</button>
+        </div>
+        <div>
+          <label for="fb-title" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">1. your request in one short sentence</label>
+          <input id="fb-title" name="title" type="text" required maxlength="90"
+                 class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors"
+                 placeholder="e.g. add a /home command">
+        </div>
+
+        <div>
+          <label for="fb-want" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">2. what would you like?</label>
+          <textarea id="fb-want" name="want" rows="3" required
+                    class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors resize-y"
+                    placeholder="describe the feature or change you want"></textarea>
+        </div>
+
+        <div>
+          <label for="fb-why" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">3. why?</label>
+          <textarea id="fb-why" name="why" rows="3" required
+                    class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors resize-y"
+                    placeholder="what would it improve or fix for you"></textarea>
+        </div>
+
+        <div>
+          <label for="fb-extra" class="block font-mono text-[12px] uppercase tracking-[0.12em] text-zinc-400 mb-2">4. anything else?</label>
+          <textarea id="fb-extra" name="extra" rows="3"
+                    class="w-full rounded-lg border border-zinc-700 bg-void-950 px-4 py-3 font-mono text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-ember-400 transition-colors resize-y"
+                    placeholder="context, examples, screenshots"></textarea>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary px-6 py-3">
+            <i class="ph ph-chats-circle" aria-hidden="true"></i>
+            open github issue
+          </button>
+        </div>
+      </form>
     </section>
 
     <!-- CTA -->
@@ -424,7 +486,7 @@
           No humans were involved in this decision.
         </p>
         <div class="mt-8 flex items-center justify-center">
-          <a href="#" id="download-btn-cta" data-fallback-url="https://github.com/gabytz777/vib-MC/releases/download/v0.0.4-hotfix.1/vib-mc.jar"
+          <a href="#" id="download-btn-cta" data-fallback-url="https://github.com/gabytz777/vib-MC/releases/download/v0.0.4-hotfix.2/vib-mc.jar"
              class="btn px-8 py-3.5 bg-void-950 border-void-950 text-ember-400 hover:bg-void-900 hover:border-void-950 hover:text-ember-300">
             <i class="ph ph-download" aria-hidden="true"></i>
             <span>Download .jar</span>
@@ -445,7 +507,7 @@
           <a href="docs.html" class="hover:text-zinc-100 transition-colors">docs</a>
           <a href="https://github.com/gabytz777/vib-MC" target="_blank" rel="noopener" class="hover:text-zinc-100 transition-colors">github</a>
           <a href="https://github.com/gabytz777/vib-MC/releases" target="_blank" rel="noopener" class="hover:text-zinc-100 transition-colors">releases ↗</a>
-          <a href="#bug-report" class="hover:text-zinc-100 transition-colors">report a bug</a>
+          <a href="#bug-report" class="hover:text-zinc-100 transition-colors">have a request?</a>
           <a href="#top" class="hover:text-zinc-100 transition-colors">back to top ↑</a>
         </nav>
       </div>

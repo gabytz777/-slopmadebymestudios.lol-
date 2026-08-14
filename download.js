@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   "use strict";
 
   const REPO = "gabytz777/vib-MC";
@@ -50,7 +50,7 @@
       if (downloadLabel && release) {
         downloadLabel.textContent = `Download ${release.tag_name}`;
       }
-      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.4-hotfix.1";
+      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.4-hotfix.2";
       if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
       if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
       if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body);
@@ -96,7 +96,7 @@
       await copyText("gradle build\njava -jar build/libs/vib-mc.jar");
       if (copyLabel) {
         const prev = copyLabel.textContent;
-        copyLabel.textContent = "copied ✓";
+        copyLabel.textContent = "copied âœ“";
         window.setTimeout(() => { copyLabel.textContent = prev; }, 1600);
       }
     });
@@ -107,12 +107,37 @@
       const cmd = btn.textContent.trim();
       await copyText(cmd);
       const prev = btn.textContent;
-      btn.textContent = "copied ✓";
+      btn.textContent = "copied âœ“";
       window.setTimeout(() => { btn.textContent = prev; }, 1200);
     });
   });
 
+  const requestChooser = document.getElementById("request-chooser");
   const bugForm = document.getElementById("bug-form");
+  const feedbackForm = document.getElementById("feedback-form");
+
+  const showForm = (which) => {
+    if (requestChooser) requestChooser.classList.add("hidden");
+    if (bugForm) bugForm.classList.toggle("hidden", which !== "bug");
+    if (feedbackForm) feedbackForm.classList.toggle("hidden", which !== "feedback");
+  };
+
+  document.querySelectorAll("[data-form]").forEach((btn) => {
+    btn.addEventListener("click", () => showForm(btn.getAttribute("data-form")));
+  });
+  document.querySelectorAll("[data-form-back]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (bugForm) bugForm.classList.add("hidden");
+      if (feedbackForm) feedbackForm.classList.add("hidden");
+      if (requestChooser) requestChooser.classList.remove("hidden");
+    });
+  });
+
+  const openIssueWithTemplate = (template, title) => {
+    const url = `https://github.com/gabytz777/vib-MC/issues/new?template=${template}&title=${encodeURIComponent(title)}`;
+    window.open(url, "_blank", "noopener");
+  };
+
   if (bugForm) {
     const bugTitle = document.getElementById("bug-title");
     const bugWhat = document.getElementById("bug-what");
@@ -123,19 +148,20 @@
     bugForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const title = (bugTitle && bugTitle.value.trim()) || "bug report";
-      const body = [
-        "# What's the issue?",
-        (bugWhat && bugWhat.value.trim()) || "",
-        "",
-        "# How did it occur?",
-        (bugSteps && bugSteps.value.trim()) || "",
-        "",
-        "# Version & log",
-        `Release: ${(bugVersion && bugVersion.value.trim()) || "unknown"}`,
-        `Log: ${(bugLog && bugLog.value.trim()) || "not provided"}`,
-      ].join("\n");
-      const url = `https://github.com/gabytz777/vib-MC/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
-      window.open(url, "_blank", "noopener");
+      openIssueWithTemplate("bug_report.yml", title);
+    });
+  }
+
+  if (feedbackForm) {
+    const fbTitle = document.getElementById("fb-title");
+    const fbWant = document.getElementById("fb-want");
+    const fbWhy = document.getElementById("fb-why");
+    const fbExtra = document.getElementById("fb-extra");
+
+    feedbackForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const title = (fbTitle && fbTitle.value.trim()) || "feedback";
+      openIssueWithTemplate("feedback.yml", title);
     });
   }
 
