@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   "use strict";
 
   const REPO = "gabytz777/vib-MC";
@@ -96,7 +96,7 @@
       await copyText("gradle build\njava -jar build/libs/vib-mc.jar");
       if (copyLabel) {
         const prev = copyLabel.textContent;
-        copyLabel.textContent = "copied ✓";
+        copyLabel.textContent = "copied ?";
         window.setTimeout(() => { copyLabel.textContent = prev; }, 1600);
       }
     });
@@ -107,7 +107,7 @@
       const cmd = btn.textContent.trim();
       await copyText(cmd);
       const prev = btn.textContent;
-      btn.textContent = "copied ✓";
+      btn.textContent = "copied ?";
       window.setTimeout(() => { btn.textContent = prev; }, 1200);
     });
   });
@@ -187,64 +187,122 @@
     let ymlText = "";
     let javaText = "";
 
-    const addCommandUnit = (action, name, value) => {
-      const unit = document.createElement("div");
-      unit.className = "sb-unit";
-      const actBlock = action === "gamemode"
-        ? `<div class="sb-block sb-act"><span>set game mode to <select class="sb-oval"><option value="creative">creative</option><option value="survival">survival</option></select></span></div>`
-        : `<div class="sb-block sb-act"><span>say <input class="sb-oval" type="text" value="${esc(value)}" placeholder="hello!"></span></div>`;
-      unit.innerHTML = `
-        <div class="sb-unit-blocks">
-          <div class="sb-block sb-cmd sb-hat"><span>when player runs <span class="sb-prefix">/</span><input class="sb-oval" type="text" value="${esc(name)}" placeholder="hello"></span></div>
-          ${actBlock}
-        </div>
-        <button type="button" class="sb-remove" aria-label="remove">✕</button>`;
-      unit.querySelector(".sb-remove").addEventListener("click", () => unit.remove());
-      if (action === "gamemode") {
-        unit.querySelector("select").value = value === "survival" ? "survival" : "creative";
-      }
-      bpCommands.appendChild(unit);
+    let activeUnit = null;
+
+    const setActive = (unit) => {
+      bpCommands.querySelectorAll(".sb-unit").forEach((u) => u.classList.remove("sb-active"));
+      bpListeners.querySelectorAll(".sb-unit").forEach((u) => u.classList.remove("sb-active"));
+      activeUnit = unit;
+      if (unit) unit.classList.add("sb-active");
+      updatePalette();
     };
 
-    const addListenerUnit = (event, action, value) => {
+    const hatInfo = (unit) => {
+      if (!unit) return null;
+      const hat = unit.querySelector(".sb-hat");
+      if (!hat) return null;
+      if (hat.classList.contains("sb-cmd")) return { kind: "cmd" };
+      return { kind: hat.querySelector("select").value };
+    };
+
+    const newUnit = (hatHtml, hatClass) => {
       const unit = document.createElement("div");
       unit.className = "sb-unit";
-      const actBlock = action === "cancel"
-        ? `<div class="sb-block sb-cancel"><span>cancel the chat</span></div>`
-        : `<div class="sb-block sb-act"><span>say <input class="sb-oval" type="text" value="${esc(value)}" placeholder="hello!"></span></div>`;
       unit.innerHTML = `
         <div class="sb-unit-blocks">
-          <div class="sb-block sb-lsn sb-hat"><span>when player <select class="sb-oval"><option value="join">joins</option><option value="quit">quits</option><option value="chat">chats</option></select></span></div>
-          ${actBlock}
+          <div class="sb-block ${hatClass} sb-hat">${hatHtml}</div>
         </div>
-        <button type="button" class="sb-remove" aria-label="remove">✕</button>`;
-      unit.querySelector(".sb-remove").addEventListener("click", () => unit.remove());
-      unit.querySelector(".sb-lsn select").value = event;
-      bpListeners.appendChild(unit);
+        <button type="button" class="sb-remove" aria-label="remove">?</button>`;
+      unit.addEventListener("click", (e) => {
+        if (!e.target.closest(".sb-remove")) setActive(unit);
+      });
+      unit.querySelector(".sb-remove").addEventListener("click", () => {
+        unit.remove();
+        if (activeUnit === unit) setActive(null);
+        refresh();
+      });
+      return unit;
+    };
+
+    const addHat = (kind) => {
+      let unit;
+      if (kind === "cmd") {
+        unit = newUnit(
+          `when player runs <span class="sb-prefix">/</span><input class="sb-oval" type="text" value="hello" placeholder="hello">`,
+          "sb-cmd"
+        );
+        bpCommands.appendChild(unit);
+      } else {
+        unit = newUnit(
+          `when player <select class="sb-oval"><option value="join">joins</option><option value="quit">quits</option><option value="chat">chats</option></select>`,
+          "sb-lsn"
+        );
+        unit.querySelector(".sb-lsn select").value = kind;
+        bpListeners.appendChild(unit);
+      }
+      setActive(unit);
+      refresh();
+    };
+
+    const actionHtml = (action, value) => {
+      if (action === "gm") {
+        return `<div class="sb-block sb-act"><span>set game mode to <select class="sb-oval"><option value="creative">creative</option><option value="survival">survival</option></select></span></div>`;
+      }
+      if (action === "cancel") {
+        return `<div class="sb-block sb-cancel"><span>cancel the chat</span></div>`;
+      }
+      return `<div class="sb-block sb-act"><span>say <input class="sb-oval" type="text" value="${esc(value)}" placeholder="hello!"></span></div>`;
+    };
+
+    const snapAction = (action) => {
+      if (!activeUnit) addHat("cmd");
+      if (!activeUnit) return;
+      const hat = hatInfo(activeUnit);
+      if (action === "cancel" && hat && hat.kind !== "chat") return;
+      const defaults = { cmd: "Hello from MyPlugin!", join: "Welcome to the vibe!", quit: "Goodbye!", chat: "Hi!" };
+      const wrap = document.createElement("div");
+      wrap.innerHTML = actionHtml(action, defaults[hat ? hat.kind : "cmd"] || "Hello!").trim();
+      activeUnit.querySelector(".sb-unit-blocks").appendChild(wrap.firstChild);
+      refresh();
+    };
+
+    const updatePalette = () => {
+      const hat = hatInfo(activeUnit);
+      document.querySelectorAll("[data-piece]").forEach((btn) => {
+        const disabled = btn.getAttribute("data-piece") === "act-cancel" && (!hat || hat.kind !== "chat");
+        btn.disabled = disabled;
+        btn.classList.toggle("sb-disabled", disabled);
+      });
     };
 
     const refresh = () => {
+      const collect = (unit) => {
+        const actions = [];
+        unit.querySelectorAll(`.sb-unit-blocks > .sb-block`).forEach((b) => {
+          if (b.classList.contains("sb-hat")) return;
+          if (b.classList.contains("sb-cancel")) actions.push({ action: "cancel" });
+          else if (b.querySelector("select")) actions.push({ action: "gm", value: b.querySelector("select").value });
+          else actions.push({ action: "say", value: b.querySelector("input").value.trim() });
+        });
+        return actions;
+      };
       const cmds = [];
       bpCommands.querySelectorAll(":scope > .sb-unit").forEach((unit) => {
-        const name = unit.querySelector(".sb-cmd .sb-oval").value.trim()
+        const hat = unit.querySelector(".sb-cmd");
+        if (!hat) return;
+        const name = hat.querySelector(".sb-oval").value.trim()
           .replace(/[^a-zA-Z0-9_-]/g, "").toLowerCase();
         if (!name) return;
-        const act = unit.querySelector(".sb-act");
-        if (act && act.querySelector("select")) {
-          cmds.push({ name, action: "gamemode", value: act.querySelector("select").value });
-        } else {
-          cmds.push({ name, action: "say", value: act ? act.querySelector("input").value.trim() : "" });
-        }
+        const actions = collect(unit);
+        if (actions.length) cmds.push({ name, actions });
       });
       const lst = [];
       bpListeners.querySelectorAll(":scope > .sb-unit").forEach((unit) => {
-        const event = unit.querySelector(".sb-lsn select").value;
-        if (unit.querySelector(".sb-cancel")) {
-          lst.push({ event, action: "cancel", value: "" });
-        } else {
-          const act = unit.querySelector(".sb-act");
-          lst.push({ event, action: "say", value: act ? act.querySelector("input").value.trim() : "" });
-        }
+        const hat = unit.querySelector(".sb-lsn");
+        if (!hat) return;
+        const event = hat.querySelector("select").value;
+        const actions = collect(unit);
+        if (actions.length) lst.push({ event, actions });
       });
 
       const rawName = (bpName.value.trim() || "MyPlugin").replace(/[^a-zA-Z0-9_-]/g, "");
@@ -267,7 +325,8 @@
         "net.vibmc.command.CommandSender",
         "net.vibmc.plugin.VibMCPlugin",
       ]);
-      if (cmds.some((c) => c.action === "gamemode")) {
+      if (cmds.some((c) => c.actions.some((a) => a.action === "gm")) ||
+          lst.some((l) => l.actions.some((a) => a.action === "gm"))) {
         imports.add("net.vibmc.entity.PlayerEntity");
         imports.add("net.vibmc.player.GameMode");
       }
@@ -287,17 +346,19 @@
 
       cmds.forEach((c) => {
         const body = [];
-        if (c.action === "gamemode") {
-          body.push("if (!sender.isPlayer()) {");
-          body.push(`    sender.sendMessage(${msg("Only players can use /" + c.name)});`);
-          body.push("    return false;");
-          body.push("}");
-          body.push("PlayerEntity player = sender.getPlayer();");
-          body.push(`player.setGameMode(GameMode.${c.value === "survival" ? "SURVIVAL" : "CREATIVE"});`);
-          body.push(`player.sendMessage(${msg("Gamemode updated")});`);
-        } else {
-          body.push(`sender.sendMessage(${msg(c.value || "Hello!")});`);
-        }
+        c.actions.forEach((a) => {
+          if (a.action === "gm") {
+            body.push("if (!sender.isPlayer()) {");
+            body.push(`    sender.sendMessage(${msg("Only players can use /" + c.name)});`);
+            body.push("    return false;");
+            body.push("}");
+            body.push("PlayerEntity player = sender.getPlayer();");
+            body.push(`player.setGameMode(GameMode.${a.value === "survival" ? "SURVIVAL" : "CREATIVE"});`);
+            body.push(`player.sendMessage(${msg("Gamemode updated")});`);
+          } else {
+            body.push(`sender.sendMessage(${msg(a.value || "Hello!")});`);
+          }
+        });
         body.push("return true;");
         parts.push(
           `        getCommandManager().register(new Command(${jq(c.name)}, ${jq("Custom command /" + c.name)}, ${jq("/" + c.name)}, null) {`,
@@ -321,11 +382,15 @@
           "        @EventHandler",
           `        public void ${method}(${evtCls} event) {`,
         ];
-        if (l.event === "chat" && l.action === "cancel") {
-          def.push("            event.setCancelled(true);");
-        } else {
-          def.push(`            event.getPlayer().sendMessage(${msg(l.value || "Hi!")});`);
-        }
+        l.actions.forEach((a) => {
+          if (a.action === "cancel" && l.event === "chat") {
+            def.push("            event.setCancelled(true);");
+          } else if (a.action === "gm") {
+            def.push(`            event.getPlayer().setGameMode(GameMode.${a.value === "survival" ? "SURVIVAL" : "CREATIVE"});`);
+          } else {
+            def.push(`            event.getPlayer().sendMessage(${msg(a.value || "Hi!")});`);
+          }
+        });
         def.push("        }", "    }");
         lsnDefs.push(def.join("\n"));
       });
@@ -339,26 +404,31 @@
     document.querySelectorAll("[data-piece]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const piece = btn.getAttribute("data-piece");
-        if (piece === "cmd-say") addCommandUnit("say", "hello", "Hello from MyPlugin!");
-        if (piece === "cmd-gm") addCommandUnit("gamemode", "gmc", "creative");
-        if (piece === "lsn-join") addListenerUnit("join", "say", "Welcome to the vibe!");
-        if (piece === "lsn-quit") addListenerUnit("quit", "say", "Goodbye!");
-        if (piece === "lsn-cancel") addListenerUnit("chat", "cancel", "");
-        refresh();
+        if (piece === "hat-cmd") addHat("cmd");
+        if (piece === "hat-join") addHat("join");
+        if (piece === "hat-quit") addHat("quit");
+        if (piece === "hat-chat") addHat("chat");
+        if (piece === "act-say") snapAction("say");
+        if (piece === "act-gm") snapAction("gm");
+        if (piece === "act-cancel") snapAction("cancel");
       });
     });
 
+    const refreshAll = () => { refresh(); updatePalette(); };
     [bpName, bpPkg, bpVersion, bpDescription].forEach((el) => {
       el.addEventListener("input", refresh);
     });
     bpCommands.addEventListener("input", refresh);
-    bpCommands.addEventListener("change", refresh);
+    bpCommands.addEventListener("change", refreshAll);
     bpListeners.addEventListener("input", refresh);
-    bpListeners.addEventListener("change", refresh);
+    bpListeners.addEventListener("change", refreshAll);
 
-    addCommandUnit("say", "hello", "Hello from MyPlugin!");
-    addListenerUnit("join", "say", "Welcome to the vibe!");
+    addHat("cmd");
+    snapAction("say");
+    addHat("join");
+    snapAction("say");
     refresh();
+    updatePalette();
 
     // minimal zip writer (store method, no dependencies)
     const crcTable = (() => {

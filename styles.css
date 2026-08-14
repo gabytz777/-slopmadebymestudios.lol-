@@ -3,6 +3,12 @@
 
 .sb-piece{display:inline-flex;align-items:center;gap:.375rem;border-radius:999px;padding:.5rem .875rem;font-family:var(--font-mono);font-size:12px;line-height:1;letter-spacing:.04em;cursor:pointer;transition:transform .15s ease,filter .15s ease;border:1px solid transparent}
 .sb-piece:hover{transform:translateY(-1px)}
+.sb-piece.sb-act{background:rgba(153,102,255,.14);border-color:rgba(153,102,255,.45);color:#b79aff}
+.sb-piece.sb-act:hover{filter:brightness(1.2)}
+.sb-piece.sb-cancel{background:rgba(255,93,93,.12);border-color:rgba(255,93,93,.4);color:#ff8f8f}
+.sb-piece.sb-cancel:hover{filter:brightness(1.15)}
+.sb-piece.sb-disabled{opacity:.35;pointer-events:none}
+.sb-unit.sb-active{outline:2px solid rgba(250,204,21,.5);outline-offset:4px;border-radius:.75rem}
 .sb-piece.sb-cmd{background:rgba(76,151,255,.14);border-color:rgba(76,151,255,.45);color:#7fb3ff}
 .sb-piece.sb-cmd:hover{filter:brightness(1.25)}
 .sb-piece.sb-lsn{background:rgba(255,191,0,.12);border-color:rgba(255,191,0,.4);color:#ffcf4d}

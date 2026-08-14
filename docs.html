@@ -285,15 +285,29 @@ public class JoinListener implements Listener {
         <div class="card rounded-2xl p-6 md:p-8 mt-6 reveal" style="--reveal-delay:80ms">
         <h3 class="text-lg font-semibold tracking-tight text-zinc-50">2. Scripts</h3>
         <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
-          Snap pieces from the palette onto the scripts. The ✕ on a script removes it.
+          Click a <span class="text-zinc-200">start</span> piece to open a script, then snap
+          <span class="text-zinc-200">do</span> pieces onto it. Click a script to make it active.
+          The ✕ removes a script.
         </p>
 
-        <div class="mt-5 flex flex-wrap gap-3">
-          <button type="button" data-piece="cmd-say" class="sb-piece sb-cmd">+ when player runs /hello → say</button>
-          <button type="button" data-piece="cmd-gm" class="sb-piece sb-cmd">+ when player runs /gmc → set game mode</button>
-          <button type="button" data-piece="lsn-join" class="sb-piece sb-lsn">+ when player joins → say</button>
-          <button type="button" data-piece="lsn-quit" class="sb-piece sb-lsn">+ when player quits → say</button>
-          <button type="button" data-piece="lsn-cancel" class="sb-piece sb-lsn">+ when player chats → cancel</button>
+        <div class="mt-5 flex flex-wrap items-start gap-5">
+          <div>
+            <div class="sb-stack-label">start</div>
+            <div class="flex flex-wrap gap-3">
+              <button type="button" data-piece="hat-cmd" class="sb-piece sb-cmd">when player runs /…</button>
+              <button type="button" data-piece="hat-join" class="sb-piece sb-lsn">when player joins</button>
+              <button type="button" data-piece="hat-quit" class="sb-piece sb-lsn">when player quits</button>
+              <button type="button" data-piece="hat-chat" class="sb-piece sb-lsn">when player chats</button>
+            </div>
+          </div>
+          <div>
+            <div class="sb-stack-label">do</div>
+            <div class="flex flex-wrap gap-3">
+              <button type="button" data-piece="act-say" class="sb-piece sb-act">say …</button>
+              <button type="button" data-piece="act-gm" class="sb-piece sb-act">set game mode to …</button>
+              <button type="button" data-piece="act-cancel" class="sb-piece sb-cancel">cancel the chat</button>
+            </div>
+          </div>
         </div>
 
         <div class="mt-6 grid md:grid-cols-2 gap-5">
