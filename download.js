@@ -2,7 +2,7 @@
   "use strict";
 
   const REPO = "gabytz777/vib-MC";
-  const STABLE_TAG = "v0.0.3";
+  const STABLE_TAG = "v0.0.4-hotfix.3";
   const API = `https://api.github.com/repos/${REPO}/releases/tags/${STABLE_TAG}`;
   const FALLBACK_JAR = `https://github.com/${REPO}/releases/download/${STABLE_TAG}/vib-mc.jar`;
 
@@ -52,7 +52,7 @@
     if (releaseTag) releaseTag.textContent = STABLE_TAG;
     if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
     if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
-    if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body) || "v0.0.3 is the current stable baseline.";
+    if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body) || `${STABLE_TAG} is the current stable baseline.`;
     if (versionStable) versionStable.textContent = STABLE_TAG;
   };
 
