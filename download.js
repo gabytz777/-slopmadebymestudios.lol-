@@ -2,7 +2,9 @@
   "use strict";
 
   const REPO = "gabytz777/vib-MC";
-  const API = `https://api.github.com/repos/${REPO}/releases`;
+  const STABLE_TAG = "v0.0.3";
+  const API = `https://api.github.com/repos/${REPO}/releases/tags/${STABLE_TAG}`;
+  const FALLBACK_JAR = `https://github.com/${REPO}/releases/download/${STABLE_TAG}/vib-mc.jar`;
 
   const downloadBtns = [
     document.getElementById("download-btn"),
@@ -38,23 +40,20 @@
     return text.slice(0, 140) + (text.length > 140 ? "..." : "");
   };
 
-  const applyRelease = (release, jar, kind) => {
-    const href = jar ? jar.browser_download_url : null;
-    if (kind === "stable") {
-      downloadBtns.forEach((btn) => {
-        if (href && btn) {
-          btn.href = href;
-          btn.removeAttribute("data-fallback");
-        }
-      });
-      if (downloadLabel && release) {
-        downloadLabel.textContent = `Download ${release.tag_name}`;
+  const applyRelease = (release, jar) => {
+    const href = jar ? jar.browser_download_url : FALLBACK_JAR;
+    downloadBtns.forEach((btn) => {
+      if (btn) {
+        btn.href = href;
+        btn.removeAttribute("data-fallback");
       }
-      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.3";
-      if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
-      if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
-      if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body);
-    }
+    });
+    if (downloadLabel) downloadLabel.textContent = `Download ${STABLE_TAG}`;
+    if (releaseTag) releaseTag.textContent = STABLE_TAG;
+    if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
+    if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
+    if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body) || "v0.0.3 is the current stable baseline.";
+    if (versionStable) versionStable.textContent = STABLE_TAG;
   };
 
   window.fetch(API)
@@ -62,18 +61,14 @@
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();
     })
-    .then((releases) => {
-      if (!Array.isArray(releases) || releases.length === 0) throw new Error("no releases");
-      const stable = releases.find((rel) => !rel.prerelease && !rel.draft) || releases[0];
-
-      applyRelease(stable, firstJar(stable), "stable");
+    .then((release) => {
+      if (!release || release.draft || release.prerelease || release.tag_name !== STABLE_TAG) {
+        throw new Error("stable release unavailable");
+      }
+      applyRelease(release, firstJar(release));
     })
     .catch(() => {
-      downloadBtns.forEach((btn) => {
-        const fallback = btn && btn.getAttribute("data-fallback-url");
-        if (fallback) btn.href = fallback;
-      });
-      applyRelease(null, null, "stable");
+      applyRelease(null, null);
     });
 
   const copyText = async (text) => {
@@ -131,7 +126,7 @@
         (bugSteps && bugSteps.value.trim()) || "",
         "",
         "# Version & log",
-        `Release: ${(bugVersion && bugVersion.value.trim()) || "unknown"}`,
+        `Release: ${(bugVersion && bugVersion.value.trim()) || STABLE_TAG}`,
         `Log: ${(bugLog && bugLog.value.trim()) || "not provided"}`,
       ].join("\n");
       const url = `https://github.com/gabytz777/vib-MC/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
