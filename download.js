@@ -2,7 +2,7 @@
   "use strict";
 
   const REPO = "gabytz777/vib-MC";
-  const API = `https://api.github.com/repos/${REPO}/releases`;
+  const API = `https://api.github.com/repos/${REPO}/releases/tags/v0.0.4-hotfix.1`;
 
   const downloadBtns = [
     document.getElementById("download-btn"),
@@ -50,7 +50,7 @@
       if (downloadLabel && release) {
         downloadLabel.textContent = `Download ${release.tag_name}`;
       }
-      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.4-hotfix.2";
+      if (releaseTag) releaseTag.textContent = (release && release.tag_name) || "v0.0.4-hotfix.1";
       if (releaseDate) releaseDate.textContent = fmtDate(release && release.published_at);
       if (releaseSize) releaseSize.textContent = fmtSize(jar && jar.size);
       if (releaseNotes) releaseNotes.textContent = notesExcerpt(release && release.body);
@@ -62,11 +62,9 @@
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       return r.json();
     })
-    .then((releases) => {
-      if (!Array.isArray(releases) || releases.length === 0) throw new Error("no releases");
-      const stable = releases.find((rel) => !rel.prerelease && !rel.draft) || releases[0];
-
-      applyRelease(stable, firstJar(stable), "stable");
+    .then((release) => {
+      if (!release || release.draft || release.prerelease) throw new Error("release unavailable");
+      applyRelease(release, firstJar(release), "stable");
     })
     .catch(() => {
       downloadBtns.forEach((btn) => {
@@ -179,7 +177,7 @@
       { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
     ));
     const jq = (s) => JSON.stringify(s);
-    const msg = (s) => jq(jq(s)); // JSON text as a Java string literal: "{\"text\":\"...\"}"
+    const msg = (s) => jq(jq(s));
 
     let lastName = "MyPlugin";
     let lastPkg = "com.example";
@@ -506,9 +504,9 @@
 
     bpDownload.addEventListener("click", () => {
       const pkgPath = lastPkg.split(".").join("/");
-      const bat = `@echo off\r\nrem requires a JDK 8+ (javac/jar on PATH)\r\nif not exist vib-mc.jar (\r\n  echo Downloading vib-mc.jar...\r\n  powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://github.com/gabytz777/vib-MC/releases/latest/download/vib-mc.jar' -OutFile 'vib-mc.jar'"\r\n)\r\njavac -cp vib-mc.jar -d out src\\${pkgPath}\\${lastCls}.java\r\nif errorlevel 1 (\r\n  echo Compile failed - fix the errors above, or update the paths in this script\r\n  pause\r\n  exit /b 1\r\n)\r\njar cf ${lastCls}.jar -C out . plugin.yml\r\necho built ${lastCls}.jar - drop it in plugins/ and restart the server\r\npause\r\n`;
-      const sh = `#!/bin/sh\n# requires a JDK 8+ (javac/jar on PATH)\nif [ ! -f vib-mc.jar ]; then\n  echo "Downloading vib-mc.jar..."\n  curl -L -o vib-mc.jar https://github.com/gabytz777/vib-MC/releases/latest/download/vib-mc.jar\nfi\njavac -cp vib-mc.jar -d out src/${pkgPath}/${lastCls}.java || { echo "Compile failed"; exit 1; }\njar cf ${lastCls}.jar -C out . plugin.yml\necho "built ${lastCls}.jar - drop it in plugins/ and restart the server"\n`;
-      const readme = `vib-MC plugin blueprint\n========================\n\nFiles:\n  plugin.yml                    - plugin descriptor (Properties format)\n  src/${pkgPath}/${lastCls}.java  - main plugin class\n  build.bat / build.sh          - build scripts\n\nBuild:\n  Windows:   double-click build.bat\n  Linux/Mac: sh build.sh\n\nThe scripts download the latest vib-MC jar automatically if vib-mc.jar\nis not in this folder.\n\nRequires: a JDK 8+ (javac and jar on your PATH).\nOutput: ${lastCls}.jar -> copy into <server>/plugins/ and restart the server.\n`;
+      const bat = `@echo off\r\nrem requires a JDK 8+ (javac/jar on PATH)\r\nif not exist vib-mc.jar (\r\n  echo Downloading vib-mc.jar...\r\n  powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://github.com/gabytz777/vib-MC/releases/download/v0.0.4-hotfix.1/vib-mc.jar' -OutFile 'vib-mc.jar'"\r\n)\r\njavac -cp vib-mc.jar -d out src\\${pkgPath}\\${lastCls}.java\r\nif errorlevel 1 (\r\n  echo Compile failed - fix the errors above, or update the paths in this script\r\n  pause\r\n  exit /b 1\r\n)\r\njar cf ${lastCls}.jar -C out . plugin.yml\r\necho built ${lastCls}.jar - drop it in plugins/ and restart the server\r\npause\r\n`;
+      const sh = `#!/bin/sh\n# requires a JDK 8+ (javac/jar on PATH)\nif [ ! -f vib-mc.jar ]; then\n  echo "Downloading vib-mc.jar..."\n  curl -L -o vib-mc.jar https://github.com/gabytz777/vib-MC/releases/download/v0.0.4-hotfix.1/vib-mc.jar\nfi\njavac -cp vib-mc.jar -d out src/${pkgPath}/${lastCls}.java || { echo "Compile failed"; exit 1; }\njar cf ${lastCls}.jar -C out . plugin.yml\necho "built ${lastCls}.jar - drop it in plugins/ and restart the server"\n`;
+      const readme = `vib-MC plugin blueprint\n========================\n\nFiles:\n  plugin.yml                    - plugin descriptor (Properties format)\n  src/${pkgPath}/${lastCls}.java  - main plugin class\n  build.bat / build.sh          - build scripts\n\nBuild:\n  Windows:   double-click build.bat\n  Linux/Mac: sh build.sh\n\nThe scripts download the v0.0.4-hotfix.1 vib-MC jar automatically if vib-mc.jar\nis not in this folder.\n\nRequires: a JDK 8+ (javac and jar on your PATH).\nOutput: ${lastCls}.jar -> copy into <server>/plugins/ and restart the server.\n`;
       const files = [
         { name: "plugin.yml", data: utf8(ymlText) },
         { name: `src/${pkgPath}/${lastCls}.java`, data: utf8(javaText) },
