@@ -101,3 +101,49 @@
     }
   }
 }
+
+/* ---- plugin blueprint (scratch-style builder) ---- */
+.sb-piece{display:inline-flex;align-items:center;gap:.375rem;border-radius:999px;padding:.5rem .875rem;font-family:var(--font-mono);font-size:12px;line-height:1;letter-spacing:.04em;cursor:pointer;transition:transform .15s ease,filter .15s ease;border:1px solid transparent}
+.sb-piece:hover{transform:translateY(-1px)}
+.sb-piece.sb-act{background:rgba(153,102,255,.14);border-color:rgba(153,102,255,.45);color:#b79aff}
+.sb-piece.sb-act:hover{filter:brightness(1.2)}
+.sb-piece.sb-cancel{background:rgba(255,93,93,.12);border-color:rgba(255,93,93,.4);color:#ff8f8f}
+.sb-piece.sb-cancel:hover{filter:brightness(1.15)}
+.sb-piece.sb-cmd{background:rgba(76,151,255,.14);border-color:rgba(76,151,255,.45);color:#7fb3ff}
+.sb-piece.sb-cmd:hover{filter:brightness(1.25)}
+.sb-piece.sb-lsn{background:rgba(255,191,0,.12);border-color:rgba(255,191,0,.4);color:#ffcf4d}
+.sb-piece.sb-lsn:hover{filter:brightness(1.2)}
+.sb-piece.sb-disabled{opacity:.35;pointer-events:none}
+.sb-stack-label{font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#71717a;margin-bottom:.5rem}
+.sb-stack{display:flex;flex-direction:column;gap:.75rem;min-height:9rem;border:1px dashed #3f3f46;border-radius:.75rem;padding:1rem}
+.sb-unit{display:flex;align-items:flex-start;gap:.5rem;cursor:pointer}
+.sb-unit.sb-active{outline:2px solid rgba(250,204,21,.5);outline-offset:4px;border-radius:.75rem}
+.sb-unit-blocks{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.sb-block{display:inline-flex;align-items:center;border-radius:.4rem;padding:.4rem .7rem;font-family:var(--font-mono);font-size:13px;font-weight:500;color:#fff;box-shadow:inset 0 -2px 0 rgba(0,0,0,.25);flex-wrap:wrap;gap:.25rem}
+.sb-hat{border-top-left-radius:1.2rem}
+.sb-cmd{background:#4c97ff}
+.sb-lsn{background:#ffbf00;color:#1f1f1f;box-shadow:inset 0 -2px 0 rgba(0,0,0,.18)}
+.sb-act{background:#9966ff}
+.sb-cancel{background:#ff5d5d}
+.sb-oval{background:#fff;border:none;border-radius:999px;padding:.2rem .55rem;font:inherit;color:#18181b;outline:none;min-width:2.5rem;max-width:14rem}
+.sb-prefix{opacity:.75}
+.sb-remove{flex:none;width:1.4rem;height:1.4rem;border-radius:999px;border:1px solid #3f3f46;background:transparent;color:#a1a1aa;font-size:11px;line-height:1;cursor:pointer;margin-top:.15rem;transition:color .15s ease,border-color .15s ease}
+.sb-remove:hover{color:#ff5d5d;border-color:#ff5d5d}
+
+/* a step in a script, with its reorder/remove controls */
+.sb-row{display:flex;align-items:center;gap:.4rem}
+.sb-row-tools{display:flex;gap:.15rem;opacity:0;transition:opacity .15s ease}
+.sb-row:hover .sb-row-tools,.sb-row:focus-within .sb-row-tools{opacity:1}
+.sb-mini{width:1.25rem;height:1.25rem;border-radius:.3rem;border:1px solid #3f3f46;background:transparent;color:#a1a1aa;font-size:10px;line-height:1;cursor:pointer}
+.sb-mini:hover:not(:disabled){color:#fafafa;border-color:#71717a}
+.sb-mini:disabled{opacity:.25;cursor:default}
+/* a piece that no longer applies to its script, e.g. "cancel the chat" on a join */
+.sb-stale{opacity:.4;text-decoration:line-through}
+.sb-empty{font-family:var(--font-mono);font-size:12px;color:#52525b;padding:.15rem 0}
+.sb-warnings{margin-top:1.25rem;display:flex;flex-direction:column;gap:.35rem;font-family:var(--font-mono);font-size:12.5px;color:#ffcf4d}
+
+/* generated-code preview */
+.sb-tab{border-radius:.5rem;border:1px solid #3f3f46;background:transparent;color:#a1a1aa;padding:.3rem .7rem;font-family:var(--font-mono);font-size:12px;cursor:pointer;transition:color .15s ease,border-color .15s ease,background .15s ease}
+.sb-tab:hover{color:#fafafa;border-color:#71717a}
+.sb-tab.sb-tab-on{background:rgba(250,204,21,.12);border-color:rgba(250,204,21,.45);color:#facc15}
+.sb-code{max-height:26rem;overflow:auto;border-radius:.75rem;border:1px solid #27272a;background:#0d0b0a;padding:1rem 1.15rem;font-family:var(--font-mono);font-size:12.5px;line-height:1.65;color:#d4d4d8;white-space:pre;-moz-tab-size:4;tab-size:4}
